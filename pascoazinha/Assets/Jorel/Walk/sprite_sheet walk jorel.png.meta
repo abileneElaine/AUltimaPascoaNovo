@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 7743579970522ba4ab4260147dad08e1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8454381379158854289
+    second: sprite_sheet walk jorel_0
+  - first:
+      213: -3523460391649615501
+    second: sprite_sheet walk jorel_1
+  - first:
+      213: -4345464186210302324
+    second: sprite_sheet walk jorel_2
+  - first:
+      213: -8380291714253556475
+    second: sprite_sheet walk jorel_3
+  - first:
+      213: -7874494190228989415
+    second: sprite_sheet walk jorel_4
+  - first:
+      213: -3374156551175857576
+    second: sprite_sheet walk jorel_5
+  - first:
+      213: -2493738357440235088
+    second: sprite_sheet walk jorel_6
+  - first:
+      213: 8670647647958794121
+    second: sprite_sheet walk jorel_7
+  - first:
+      213: -4982166986984806925
+    second: sprite_sheet walk jorel_8
+  - first:
+      213: 2867818149107358746
+    second: sprite_sheet walk jorel_9
+  - first:
+      213: -3138020036241567843
+    second: sprite_sheet walk jorel_10
+  - first:
+      213: -2697641348442655032
+    second: sprite_sheet walk jorel_11
+  - first:
+      213: -890191713795860262
+    second: sprite_sheet walk jorel_12
+  - first:
+      213: -3772138875109459752
+    second: sprite_sheet walk jorel_13
+  - first:
+      213: 8207694568785236714
+    second: sprite_sheet walk jorel_14
+  - first:
+      213: -935343782186179143
+    second: sprite_sheet walk jorel_15
+  - first:
+      213: 659748266141988763
+    second: sprite_sheet walk jorel_16
+  - first:
+      213: -7776988279973926821
+    second: sprite_sheet walk jorel_17
+  - first:
+      213: 2025616706581075545
+    second: sprite_sheet walk jorel_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2946
+        width: 549
+        height: 960
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19ac074321ff35570800000000000000
+      internalID: 8454381379158854289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_1
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 2947
+        width: 550
+        height: 956
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 371e09f11772a1fc0800000000000000
+      internalID: -3523460391649615501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_2
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 2948
+        width: 544
+        height: 953
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c86c0cc885fc1b3c0800000000000000
+      internalID: -4345464186210302324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_3
+      rect:
+        serializedVersion: 2
+        x: 1725
+        y: 2950
+        width: 541
+        height: 949
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50574c9261933bb80800000000000000
+      internalID: -8380291714253556475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_4
+      rect:
+        serializedVersion: 2
+        x: 2300
+        y: 2954
+        width: 539
+        height: 942
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91a168d314d28b290800000000000000
+      internalID: -7874494190228989415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_5
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 1984
+        width: 537
+        height: 935
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85a1b966e769c21d0800000000000000
+      internalID: -3374156551175857576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_6
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 1995
+        width: 537
+        height: 927
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b932022d26746dd0800000000000000
+      internalID: -2493738357440235088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_7
+      rect:
+        serializedVersion: 2
+        x: 1158
+        y: 2000
+        width: 537
+        height: 925
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98ff825c814545870800000000000000
+      internalID: 8670647647958794121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_8
+      rect:
+        serializedVersion: 2
+        x: 1730
+        y: 2004
+        width: 542
+        height: 924
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f5a711a589cbdab0800000000000000
+      internalID: -4982166986984806925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_9
+      rect:
+        serializedVersion: 2
+        x: 2303
+        y: 2009
+        width: 555
+        height: 923
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1c56f989698cc720800000000000000
+      internalID: 2867818149107358746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_10
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1026
+        width: 542
+        height: 925
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9f43c927638374d0800000000000000
+      internalID: -3138020036241567843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_11
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 1020
+        width: 537
+        height: 928
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c67bae7c7d009ad0800000000000000
+      internalID: -2697641348442655032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_12
+      rect:
+        serializedVersion: 2
+        x: 1158
+        y: 1013
+        width: 537
+        height: 932
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad8933d4a5765a3f0800000000000000
+      internalID: -890191713795860262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_13
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 1007
+        width: 537
+        height: 935
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d8b8a1cdaba6abc0800000000000000
+      internalID: -3772138875109459752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_14
+      rect:
+        serializedVersion: 2
+        x: 2300
+        y: 1007
+        width: 539
+        height: 935
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae2d85d59b697e170800000000000000
+      internalID: 8207694568785236714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_15
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 23
+        width: 542
+        height: 945
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b52ce729cdf403f0800000000000000
+      internalID: -935343782186179143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_16
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 18
+        width: 544
+        height: 952
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b97b2947d85e72900800000000000000
+      internalID: 659748266141988763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_17
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 16
+        width: 547
+        height: 957
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5827c51d56921490800000000000000
+      internalID: -7776988279973926821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_sheet walk jorel_18
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 15
+        width: 549
+        height: 960
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9569cd699af6c1c10800000000000000
+      internalID: 2025616706581075545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sprite_sheet walk jorel_0: 8454381379158854289
+      sprite_sheet walk jorel_1: -3523460391649615501
+      sprite_sheet walk jorel_10: -3138020036241567843
+      sprite_sheet walk jorel_11: -2697641348442655032
+      sprite_sheet walk jorel_12: -890191713795860262
+      sprite_sheet walk jorel_13: -3772138875109459752
+      sprite_sheet walk jorel_14: 8207694568785236714
+      sprite_sheet walk jorel_15: -935343782186179143
+      sprite_sheet walk jorel_16: 659748266141988763
+      sprite_sheet walk jorel_17: -7776988279973926821
+      sprite_sheet walk jorel_18: 2025616706581075545
+      sprite_sheet walk jorel_2: -4345464186210302324
+      sprite_sheet walk jorel_3: -8380291714253556475
+      sprite_sheet walk jorel_4: -7874494190228989415
+      sprite_sheet walk jorel_5: -3374156551175857576
+      sprite_sheet walk jorel_6: -2493738357440235088
+      sprite_sheet walk jorel_7: 8670647647958794121
+      sprite_sheet walk jorel_8: -4982166986984806925
+      sprite_sheet walk jorel_9: 2867818149107358746
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
