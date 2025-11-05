@@ -187,7 +187,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.2192154}
+  m_Offset: {x: 0, y: 0.16529512}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -197,7 +197,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.4999995, y: 8.898949}
+  m_Size: {x: 5.4999995, y: 9.006789}
   m_EdgeRadius: 0
 --- !u!95 &8716864545568606052
 Animator:
@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc0cee6e8b597c44944238db0177763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverUI: {fileID: 0}
 --- !u!114 &6210719761464065650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,11 +280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e13d22d6327c6b49b8e1d71a989649d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cenouraBoomerang: {fileID: 0}
-  cenouraNormal: {fileID: 0}
-  cenouraFogo: {fileID: 0}
-  cenouraGelo: {fileID: 0}
-  efeitoFogo: {fileID: 0}
-  efeitoGelo: {fileID: 0}
+  cenouraBoomerang: {fileID: 8972330477186402184, guid: 4d537ab67519b364eaf5f54a5ae6b66f, type: 3}
+  cenouraNormal: {fileID: 96385280023484727, guid: 5d6b88f1d8a618e45b8ec42c91ab5e5e, type: 3}
+  cenouraFogo: {fileID: 2677161110252432957, guid: e74ea2f4353b55c459207f858131ee62, type: 3}
+  cenouraGelo: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+  efeitoFogo: {fileID: 2488221787716238160, guid: 74e7f2182d4731a449900b5694bd8c95, type: 3}
+  efeitoGelo: {fileID: 452933029522437880, guid: b6a500506db0fbc408332bbdac5ff81c, type: 3}
   spawnPoint: {fileID: 225976713535625127}
   throwForce: 10
