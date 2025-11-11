@@ -176,5 +176,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moverHorizontal: 0
-  distancia: 3
+  distancia: 4
   velocidade: 2
