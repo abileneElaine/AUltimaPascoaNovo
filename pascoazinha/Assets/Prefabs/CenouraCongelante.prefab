@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b227848f207c699458af3f18e8794071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 0.5
+  lifetime: 3
   tipo: Gelo
   efeitoFogo: {fileID: 0}
   efeitoGelo: {fileID: 452933029522437880, guid: b6a500506db0fbc408332bbdac5ff81c, type: 3}

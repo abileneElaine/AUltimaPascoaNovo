@@ -3,7 +3,7 @@ using UnityEngine;
 public class Cenoura : MonoBehaviour
 {
     [Header("Configurações da Cenoura")]
-    public float lifetime = 1f;       // Tempo antes de se autodestruir
+    public float lifetime = 3f;       // Tempo antes de se autodestruir
     public string tipo = "Normal";    // "Normal", "Fogo", "Gelo"
 
     [Header("Efeitos Visuais")]
