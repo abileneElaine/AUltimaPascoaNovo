@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6650595322093712187}
   - component: {fileID: -487887003569644082}
   - component: {fileID: -2763984392712310564}
+  - component: {fileID: -4093535373395430851}
   m_Layer: 0
   m_Name: Cobra 1
   m_TagString: Enemy
@@ -187,7 +188,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &6650595322093712187
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -251,10 +252,6 @@ MonoBehaviour:
   animator: {fileID: 4846743835754736354}
   rb: {fileID: 2742239706964633784}
   sprite: {fileID: 2485442494988242553}
-  velocidade: 1
-  distanciaPatrulha: 0.05
-  raioDeteccao: 1.5
-  tempoEntreAtaques: 1.5
 --- !u!114 &-2763984392712310564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,3 +269,17 @@ MonoBehaviour:
   animator: {fileID: 4846743835754736354}
   rb: {fileID: 2742239706964633784}
   sprite: {fileID: 2485442494988242553}
+--- !u!114 &-4093535373395430851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8685855383662272215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd6e0929b2c1a3479a2536fba885738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  raioDeMovimento: 2

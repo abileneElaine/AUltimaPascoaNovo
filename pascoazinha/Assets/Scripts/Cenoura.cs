@@ -12,7 +12,7 @@ public class Cenoura : MonoBehaviour
 
     void Start()
     {
-        // Instancia o efeito inicial se a cenoura for de fogo ou gelo
+        // Instancia efeito ao criar a cenoura, se necessário
         if (tipo == "Fogo" && efeitoFogo != null)
         {
             Instantiate(efeitoFogo, transform.position + Vector3.up * 1f, Quaternion.identity);
@@ -22,7 +22,7 @@ public class Cenoura : MonoBehaviour
             Instantiate(efeitoGelo, transform.position + Vector3.up * 1f, Quaternion.identity);
         }
 
-        // Destroi a cenoura após o tempo definido (para não ficar eterna na cena)
+        // Destrói a cenoura após o tempo definido
         Destroy(gameObject, lifetime);
     }
 
@@ -48,71 +48,36 @@ public class Cenoura : MonoBehaviour
 
     void AplicarEfeito(GameObject alvo)
     {
-        // Só aplica efeitos se o alvo tiver tag "Enemy"
+        // Só aplica efeitos se for inimigo
         if (!alvo.CompareTag("Enemy")) return;
 
-        // Tenta achar qualquer tipo de script de inimigo
-        var inimigoGenerico = alvo.GetComponent<Inimigo>();
-        var cobra = alvo.GetComponent<Cobra>();
+        Inimigo inimigo = alvo.GetComponent<Inimigo>();
+        if (inimigo == null) return;
 
-        // Se for um inimigo comum
-        if (inimigoGenerico != null)
-        {
-            AplicarDanoEfeito(inimigoGenerico);
-            return;
-        }
-
-        // Se for uma cobra
-        if (cobra != null)
-        {
-            AplicarDanoEfeito(cobra);
-            return;
-        }
-    }
-
-    void AplicarDanoEfeito(object alvo)
-    {
-        // Aplica o efeito de acordo com o tipo de cenoura
         switch (tipo)
         {
             case "Fogo":
-                if (alvo is Inimigo inimigo1)
-                {
-                    inimigo1.TomarDano(10);
-                    inimigo1.Queimar(2f, 3f);
-                }
-                else if (alvo is Cobra cobra1)
-                {
-                    cobra1.TomarDano(10);
-                    // Cobra ainda não tem efeito "Queimar" — pode ser adicionado depois se quiser
-                }
+                alvo.SendMessage("TomarDano", 10, SendMessageOptions.DontRequireReceiver);
+                inimigo.Queimar(2f, 3f); // duração e dano por segundo
                 break;
 
             case "Gelo":
-                if (alvo is Inimigo inimigo2)
-                {
-                    inimigo2.TomarDano(5);
-                    inimigo2.Congelar(2f);
-                }
-                else if (alvo is Cobra cobra2)
-                {
-                    cobra2.TomarDano(5);
-                    // idem: pode adicionar comportamento de congelar depois
-                }
+                alvo.SendMessage("TomarDano", 5, SendMessageOptions.DontRequireReceiver);
+                inimigo.Congelar(2f); // duração do congelamento
                 break;
 
-            default:
-                if (alvo is Inimigo inimigo3)
-                    inimigo3.TomarDano(10);
-                else if (alvo is Cobra cobra3)
-                    cobra3.TomarDano(10);
+            default: // Normal
+                alvo.SendMessage("TomarDano", 10, SendMessageOptions.DontRequireReceiver);
                 break;
         }
     }
+
 
     void CriarEfeitoVisual(Vector3 pos)
     {
         GameObject efeito = null;
+
+        Debug.Log("CriarEfeitoVisual chamado para tipo: " + tipo);
 
         switch (tipo)
         {
@@ -128,6 +93,8 @@ public class Cenoura : MonoBehaviour
         }
 
         if (efeito != null)
-            Destroy(efeito, 2f); // Efeito dura 2 segundos
+        {
+            Destroy(efeito, 2f); // Destrói efeito após 2 segundos
+        }
     }
 }

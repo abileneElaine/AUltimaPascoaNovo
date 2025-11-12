@@ -22,21 +22,20 @@ public class Inimigo : MonoBehaviour
         if (sprite == null) sprite = GetComponent<SpriteRenderer>();
     }
 
-    // Função chamada quando toma dano normal ou de fogo
-    public virtual void TomarDano(float dano)
+    // ⚔️ Método protegido — só classes filhas (como Cobra) podem chamar
+    protected virtual void LevarDano(int danoRecebido)
     {
         if (vidaAtual <= 0) return;
 
-        vidaAtual -= dano;
+        vidaAtual -= danoRecebido;
 
-        // Flash visual
+        // Flash vermelho ao levar dano
         if (sprite != null)
         {
             sprite.color = Color.red;
             Invoke(nameof(ResetarCor), 0.15f);
         }
 
-        // Se a vida zerar
         if (vidaAtual <= 0)
         {
             Morrer();
@@ -49,16 +48,15 @@ public class Inimigo : MonoBehaviour
             sprite.color = Color.white;
     }
 
-    // Função de morte genérica
-    public virtual void Morrer()
+    protected virtual void Morrer()
     {
         if (animator != null)
             animator.SetTrigger("Morrer");
 
-        Destroy(gameObject, 1f); // Destroi após 1 segundo
+        Destroy(gameObject, 1f);
     }
 
-    // Efeito de queimadura (dano ao longo do tempo)
+    // 🔥 Efeito de queimadura
     public void Queimar(float duracao, float danoPorSegundo)
     {
         if (queimando) return;
@@ -72,7 +70,7 @@ public class Inimigo : MonoBehaviour
 
         while (tempo < duracao)
         {
-            TomarDano(danoPorSegundo);
+            LevarDano(Mathf.RoundToInt(danoPorSegundo));
             yield return new WaitForSeconds(1f);
             tempo += 1f;
         }
@@ -80,7 +78,7 @@ public class Inimigo : MonoBehaviour
         queimando = false;
     }
 
-    // Efeito de congelamento (impede o movimento)
+    // ❄️ Efeito de congelamento
     public void Congelar(float duracao)
     {
         if (congelado) return;
