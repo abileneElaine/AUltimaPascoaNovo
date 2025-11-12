@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 3973708348746208119}
   - component: {fileID: 2485442494988242553}
   - component: {fileID: 4846743835754736354}
-  - component: {fileID: 3878556825220213415}
   - component: {fileID: 5461937103401660410}
-  - component: {fileID: 5693307866312234434}
   - component: {fileID: 2742239706964633784}
   - component: {fileID: 6650595322093712187}
+  - component: {fileID: -487887003569644082}
+  - component: {fileID: -2763984392712310564}
   m_Layer: 0
   m_Name: Cobra 1
   m_TagString: Enemy
@@ -115,19 +115,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3878556825220213415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8685855383662272215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 578433189a65ff5419e1a57cb9d80041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vida: 30
 --- !u!61 &5461937103401660410
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -174,19 +161,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.68809, y: 16.09}
   m_EdgeRadius: 0
---- !u!114 &5693307866312234434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8685855383662272215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 578433189a65ff5419e1a57cb9d80041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vida: 30
 --- !u!50 &2742239706964633784
 Rigidbody2D:
   serializedVersion: 5
@@ -260,3 +234,41 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.732072, y: 16.09}
   m_EdgeRadius: 0
+--- !u!114 &-487887003569644082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8685855383662272215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b993b72854922fb429b79c70929d9768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaMaxima: 10
+  vidaAtual: 0
+  animator: {fileID: 4846743835754736354}
+  rb: {fileID: 2742239706964633784}
+  sprite: {fileID: 2485442494988242553}
+  velocidade: 1
+  distanciaPatrulha: 0.05
+  raioDeteccao: 1.5
+  tempoEntreAtaques: 1.5
+--- !u!114 &-2763984392712310564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8685855383662272215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578433189a65ff5419e1a57cb9d80041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaMaxima: 10
+  vidaAtual: 0
+  animator: {fileID: 4846743835754736354}
+  rb: {fileID: 2742239706964633784}
+  sprite: {fileID: 2485442494988242553}

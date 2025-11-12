@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5572046784502867575}
   - component: {fileID: 4551768992113591880}
   - component: {fileID: 1494334833430922355}
+  - component: {fileID: -3928235236483698267}
   m_Layer: 0
   m_Name: Boomeramg
   m_TagString: Untagged
@@ -170,7 +171,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -192,3 +193,16 @@ MonoBehaviour:
   tipo: Normal
   efeitoFogo: {fileID: 0}
   efeitoGelo: {fileID: 0}
+--- !u!114 &-3928235236483698267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972330477186402184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902ea0cabfbb69244bcfbd36be656782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipo: Boomerang

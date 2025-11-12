@@ -48,6 +48,8 @@ GameObject:
   - component: {fileID: 6210719761464065650}
   - component: {fileID: 1692946154715538453}
   - component: {fileID: 1047889589348812362}
+  - component: {fileID: -6623285833917827346}
+  - component: {fileID: -1150625512888971810}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -250,9 +252,9 @@ MonoBehaviour:
   playerAnim: {fileID: 4055021193080888215}
   rb: {fileID: 5357102016913000242}
   maxJumps: 2
-  cenouraNormal: {fileID: 0}
-  cenouraFogo: {fileID: 0}
-  cenouraGelo: {fileID: 0}
+  cenouraNormal: {fileID: 96385280023484727, guid: 5d6b88f1d8a618e45b8ec42c91ab5e5e, type: 3}
+  cenouraFogo: {fileID: 2677161110252432957, guid: e74ea2f4353b55c459207f858131ee62, type: 3}
+  cenouraGelo: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
   deathDropAmount: 0.25
   deathDropDuration: 0.15
 --- !u!114 &1692946154715538453
@@ -288,3 +290,36 @@ MonoBehaviour:
   efeitoGelo: {fileID: 452933029522437880, guid: b6a500506db0fbc408332bbdac5ff81c, type: 3}
   spawnPoint: {fileID: 225976713535625127}
   throwForce: 10
+--- !u!114 &-6623285833917827346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9053731049673603665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3feffe979a4517a49a84e0d6a0680e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalCount: 0
+  fogoCount: 0
+  geloCount: 0
+  boomerangCount: 0
+--- !u!114 &-1150625512888971810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9053731049673603665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb2ee85e7e32354ab011b3aceefebf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaMaxima: 100
+  animator: {fileID: 8716864545568606052}
+  spriteRenderer: {fileID: 2240429783764652037}
+  tempoPiscando: 0.1
+  vezesPiscando: 4

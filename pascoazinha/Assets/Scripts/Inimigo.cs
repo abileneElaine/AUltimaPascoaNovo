@@ -1,78 +1,106 @@
-using System.Collections;
 using UnityEngine;
 
 public class Inimigo : MonoBehaviour
 {
-    public int vida = 30;
-    private bool queimando = false;
+    [Header("Configurações Gerais")]
+    public float vidaMaxima = 10f;
+    public float vidaAtual;
+
+    [Header("Componentes")]
+    public Animator animator;
+    public Rigidbody2D rb;
+    public SpriteRenderer sprite;
+
     private bool congelado = false;
-    private SpriteRenderer sr;
-    private Color corOriginal;
+    private bool queimando = false;
 
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
-        if (sr != null)
-            corOriginal = sr.color;
+        vidaAtual = vidaMaxima;
+        if (animator == null) animator = GetComponent<Animator>();
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (sprite == null) sprite = GetComponent<SpriteRenderer>();
     }
 
-    public void TomarDano(int dano)
+    // Função chamada quando toma dano normal ou de fogo
+    public virtual void TomarDano(float dano)
     {
-        vida -= dano;
-        if (vida <= 0)
+        if (vidaAtual <= 0) return;
+
+        vidaAtual -= dano;
+
+        // Flash visual
+        if (sprite != null)
+        {
+            sprite.color = Color.red;
+            Invoke(nameof(ResetarCor), 0.15f);
+        }
+
+        // Se a vida zerar
+        if (vidaAtual <= 0)
         {
             Morrer();
         }
     }
 
+    void ResetarCor()
+    {
+        if (sprite != null)
+            sprite.color = Color.white;
+    }
+
+    // Função de morte genérica
+    public virtual void Morrer()
+    {
+        if (animator != null)
+            animator.SetTrigger("Morrer");
+
+        Destroy(gameObject, 1f); // Destroi após 1 segundo
+    }
+
+    // Efeito de queimadura (dano ao longo do tempo)
     public void Queimar(float duracao, float danoPorSegundo)
     {
-        if (!queimando)
-            StartCoroutine(EfeitoFogo(duracao, danoPorSegundo));
+        if (queimando) return;
+        StartCoroutine(EfeitoQueimadura(duracao, danoPorSegundo));
     }
 
-    public void Congelar(float duracao)
-    {
-        if (!congelado)
-            StartCoroutine(EfeitoGelo(duracao));
-    }
-
-    private IEnumerator EfeitoFogo(float duracao, float danoPorSegundo)
+    private System.Collections.IEnumerator EfeitoQueimadura(float duracao, float danoPorSegundo)
     {
         queimando = true;
-
         float tempo = 0f;
+
         while (tempo < duracao)
         {
-            TomarDano((int)danoPorSegundo);
-            if (sr != null) sr.color = Color.red;
+            TomarDano(danoPorSegundo);
             yield return new WaitForSeconds(1f);
             tempo += 1f;
         }
 
-        if (sr != null) sr.color = corOriginal;
         queimando = false;
     }
 
-    private IEnumerator EfeitoGelo(float duracao)
+    // Efeito de congelamento (impede o movimento)
+    public void Congelar(float duracao)
+    {
+        if (congelado) return;
+        StartCoroutine(EfeitoCongelamento(duracao));
+    }
+
+    private System.Collections.IEnumerator EfeitoCongelamento(float duracao)
     {
         congelado = true;
 
-        // Se quiser impedir movimento:
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (animator != null)
+            animator.speed = 0f;
         if (rb != null)
             rb.linearVelocity = Vector2.zero;
 
-        if (sr != null) sr.color = Color.cyan;
-
         yield return new WaitForSeconds(duracao);
 
-        if (sr != null) sr.color = corOriginal;
-        congelado = false;
-    }
+        if (animator != null)
+            animator.speed = 1f;
 
-    void Morrer()
-    {
-        Destroy(gameObject);
+        congelado = false;
     }
 }

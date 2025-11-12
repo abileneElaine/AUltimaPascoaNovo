@@ -34,7 +34,7 @@ public class RaizAtaque : MonoBehaviour
         // Verifica se chegou perto o suficiente para causar dano
         if (Vector2.Distance(transform.position, destino) < 0.2f)
         {
-            PlayerHealth vida = alvo.GetComponent<PlayerHealth>();
+            PlayerVida vida = alvo.GetComponent<PlayerVida>();
             if (vida != null)
                 vida.TakeDamage(dano);
 
