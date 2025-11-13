@@ -107,6 +107,7 @@ MonoBehaviour:
   rotationSpeed: 100
   floatAmplitude: 0.2
   floatFrequency: 3
+  Score: 1
 --- !u!58 &8260694226668452725
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,6 +186,7 @@ MonoBehaviour:
   rotationSpeed: 100
   floatAmplitude: 0.2
   floatFrequency: 3
+  Score: 0
 --- !u!58 &6934791940925619134
 CircleCollider2D:
   m_ObjectHideFlags: 0

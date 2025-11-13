@@ -1385,7 +1385,57 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sprite_sheet (10)_0: -334973704187779632
+      sprite_sheet (10)_1: -3770702316455475993
+      sprite_sheet (10)_10: 7976222638026905736
+      sprite_sheet (10)_11: 4137395427440562627
+      sprite_sheet (10)_12: 336992753439583317
+      sprite_sheet (10)_13: -7334726423131043462
+      sprite_sheet (10)_14: -6722477883049000536
+      sprite_sheet (10)_15: -4592809977726954041
+      sprite_sheet (10)_16: 1295207500324748308
+      sprite_sheet (10)_17: -5310395062091515512
+      sprite_sheet (10)_18: -4816860838804344749
+      sprite_sheet (10)_19: -4326898868408279079
+      sprite_sheet (10)_2: -8693236702953106195
+      sprite_sheet (10)_20: -7626963131301142281
+      sprite_sheet (10)_21: 1737974932591719048
+      sprite_sheet (10)_22: 7384534237334806962
+      sprite_sheet (10)_23: -8313853595444011919
+      sprite_sheet (10)_24: 3502295238518946792
+      sprite_sheet (10)_25: 8662358003064603490
+      sprite_sheet (10)_26: -6134473274816511080
+      sprite_sheet (10)_27: 5851332844885143161
+      sprite_sheet (10)_28: -3129125016061726163
+      sprite_sheet (10)_29: 3183210944525905073
+      sprite_sheet (10)_3: -2264868345626026103
+      sprite_sheet (10)_30: -2801903637795804502
+      sprite_sheet (10)_31: 7769307296451901755
+      sprite_sheet (10)_32: -1189452034544478249
+      sprite_sheet (10)_33: 7967557510833980169
+      sprite_sheet (10)_34: -642290775242949373
+      sprite_sheet (10)_35: -6329952548707896785
+      sprite_sheet (10)_36: 1133063130378062111
+      sprite_sheet (10)_37: 4120288257586990892
+      sprite_sheet (10)_38: 7798851294427157867
+      sprite_sheet (10)_39: 6271730033200107788
+      sprite_sheet (10)_4: -4319185199482419228
+      sprite_sheet (10)_40: -7728761424971568553
+      sprite_sheet (10)_41: 4882515604420217664
+      sprite_sheet (10)_42: 2887673626176215188
+      sprite_sheet (10)_43: -2403373241735156602
+      sprite_sheet (10)_44: 5073900659441793488
+      sprite_sheet (10)_45: -225418886879428595
+      sprite_sheet (10)_46: 4421387641002242027
+      sprite_sheet (10)_47: 1975818530398525862
+      sprite_sheet (10)_48: 8878012980319774922
+      sprite_sheet (10)_49: 9055090289560113839
+      sprite_sheet (10)_5: 7272815142649127794
+      sprite_sheet (10)_6: 6768149933729964232
+      sprite_sheet (10)_7: -3668258830755375011
+      sprite_sheet (10)_8: 4924879727310499832
+      sprite_sheet (10)_9: -6611391893236579558
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

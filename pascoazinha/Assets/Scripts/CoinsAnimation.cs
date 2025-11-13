@@ -6,6 +6,8 @@ public class CoinAnimation : MonoBehaviour
     public float floatAmplitude = 0.2f;
     public float floatFrequency = 3f;
 
+    public int Score; //pontuação da moeda
+
     private Vector3 startPos;
 
     void Start()
