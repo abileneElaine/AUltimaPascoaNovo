@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2201036532074163604}
   m_Layer: 0
   m_Name: CenouraColetavel
-  m_TagString: Untagged
+  m_TagString: Cenoura
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,8 +124,8 @@ CircleCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.10928359}
-  m_Radius: 0.60071635
+  m_Offset: {x: 0.13747907, y: -0.10928359}
+  m_Radius: 0.7381955
 --- !u!50 &2472291015755386028
 Rigidbody2D:
   serializedVersion: 5

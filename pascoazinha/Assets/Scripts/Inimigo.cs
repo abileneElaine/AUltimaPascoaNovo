@@ -39,5 +39,9 @@ public class Inimigo : MonoBehaviour
         { facingRight = !facingRight; Vector3 Scale = transform.localScale; Scale.x *= -1; 
           transform.localScale = Scale; 
         }
-    
+
+        public void LevarDano()
+        {
+            throw new System.NotImplementedException();
+        }
 }
