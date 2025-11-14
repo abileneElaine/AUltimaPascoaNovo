@@ -1,104 +1,49 @@
 using UnityEngine;
 
 public class Inimigo : MonoBehaviour
-{
-    [Header("Configurações Gerais")]
-    public float vidaMaxima = 10f;
-    public float vidaAtual;
+{  
+    public float speed;
+    public bool ground = true;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public bool facingRight = true;
 
     [Header("Componentes")]
-    public Animator animator;
-    public Rigidbody2D rb;
-    public SpriteRenderer sprite;
+    public Animator animator;  // <<< ADICIONADO
 
-    private bool congelado = false;
-    private bool queimando = false;
-
-    void Start()
+    private void Update()
     {
-        vidaAtual = vidaMaxima;
-        if (animator == null) animator = GetComponent<Animator>();
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
-        if (sprite == null) sprite = GetComponent<SpriteRenderer>();
-    }
+        // --- Movimento ---
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-    // ⚔️ Método protegido — só classes filhas (como Cobra) podem chamar
-    protected virtual void LevarDano(int danoRecebido)
-    {
-        if (vidaAtual <= 0) return;
+        // --- Checar borda ---
+        ground = Physics2D.Linecast(groundCheck.position, transform.position, groundLayer);
 
-        vidaAtual -= danoRecebido;
-
-        // Flash vermelho ao levar dano
-        if (sprite != null)
+        if (ground == false)
         {
-            sprite.color = Color.red;
-            Invoke(nameof(ResetarCor), 0.15f);
+            speed *= -1;
         }
 
-        if (vidaAtual <= 0)
+        // --- Flip ---
+        if (speed > 0 && !facingRight)
         {
-            Morrer();
+            Flip();
         }
-    }
-
-    void ResetarCor()
-    {
-        if (sprite != null)
-            sprite.color = Color.white;
-    }
-
-    protected virtual void Morrer()
-    {
-        if (animator != null)
-            animator.SetTrigger("Morrer");
-
-        Destroy(gameObject, 1f);
-    }
-
-    // 🔥 Efeito de queimadura
-    public void Queimar(float duracao, float danoPorSegundo)
-    {
-        if (queimando) return;
-        StartCoroutine(EfeitoQueimadura(duracao, danoPorSegundo));
-    }
-
-    private System.Collections.IEnumerator EfeitoQueimadura(float duracao, float danoPorSegundo)
-    {
-        queimando = true;
-        float tempo = 0f;
-
-        while (tempo < duracao)
+        else if (speed < 0 && facingRight)
         {
-            LevarDano(Mathf.RoundToInt(danoPorSegundo));
-            yield return new WaitForSeconds(1f);
-            tempo += 1f;
+            Flip();
         }
 
-        queimando = false;
+        // --- Ativar animação walk ---
+        bool andando = Mathf.Abs(speed) > 0.1f;  
+        animator.SetBool("walk", andando);
     }
 
-    // ❄️ Efeito de congelamento
-    public void Congelar(float duracao)
+    void Flip()
     {
-        if (congelado) return;
-        StartCoroutine(EfeitoCongelamento(duracao));
-    }
-
-    private System.Collections.IEnumerator EfeitoCongelamento(float duracao)
-    {
-        congelado = true;
-
-        if (animator != null)
-            animator.speed = 0f;
-        if (rb != null)
-            rb.linearVelocity = Vector2.zero;
-
-        yield return new WaitForSeconds(duracao);
-
-        if (animator != null)
-            animator.speed = 1f;
-
-        congelado = false;
+        facingRight = !facingRight;
+        Vector3 Scale = transform.localScale;
+        Scale.x *= -1;
+        transform.localScale = Scale;
     }
 }

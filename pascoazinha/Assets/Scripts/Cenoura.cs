@@ -30,7 +30,7 @@ public class Cenoura : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Ground"))
         {
-            AplicarEfeito(collision.gameObject);
+           // AplicarEfeito(collision.gameObject);
             CriarEfeitoVisual(collision.contacts[0].point);
             Destroy(gameObject);
         }
@@ -40,13 +40,13 @@ public class Cenoura : MonoBehaviour
     {
         if (!other.CompareTag("Player") && !other.CompareTag("Ground"))
         {
-            AplicarEfeito(other.gameObject);
+            //AplicarEfeito(other.gameObject);
             CriarEfeitoVisual(other.transform.position);
             Destroy(gameObject);
         }
     }
 
-    void AplicarEfeito(GameObject alvo)
+   /* void AplicarEfeito(GameObject alvo)
     {
         // Só aplica efeitos se for inimigo
         if (!alvo.CompareTag("Enemy")) return;
@@ -70,7 +70,7 @@ public class Cenoura : MonoBehaviour
                 alvo.SendMessage("TomarDano", 10, SendMessageOptions.DontRequireReceiver);
                 break;
         }
-    }
+    }*/
 
 
     void CriarEfeitoVisual(Vector3 pos)
