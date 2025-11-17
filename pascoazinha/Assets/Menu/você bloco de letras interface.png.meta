@@ -260,7 +260,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "voc\xEA bloco de letras interface_0": -2349997712107439886
+      "voc\xEA bloco de letras interface_1": 4319530691238496362
+      "voc\xEA bloco de letras interface_2": 2225069087084202235
+      "voc\xEA bloco de letras interface_3": 6125533753982039994
+      "voc\xEA bloco de letras interface_4": -6940700920437048545
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

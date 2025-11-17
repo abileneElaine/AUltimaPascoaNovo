@@ -260,7 +260,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "p\xE1scoa bloco de letras interface_0": -3234069031249788221
+      "p\xE1scoa bloco de letras interface_1": 6736967789767660454
+      "p\xE1scoa bloco de letras interface_2": 1171421024102637831
+      "p\xE1scoa bloco de letras interface_3": 8428173254767221096
+      "p\xE1scoa bloco de letras interface_4": -8301684843399437972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
