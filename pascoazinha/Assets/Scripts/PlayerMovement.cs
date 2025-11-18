@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject cenouraFogo;
     public GameObject cenouraGelo;
 
+    public AudioSource somDoPulo;
+
     // Flag para não mover após morrer
 
     // Ajustes para o "descer ao morrer"
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
             jumpCount++;
             isGrounded = false;
             playerAnim.SetIsJumping(true);
+            somDoPulo.Play();
         }
 
         // --- MOVIMENTO HORIZONTAL ---
