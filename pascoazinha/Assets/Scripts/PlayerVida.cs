@@ -1,53 +1,99 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
-public class PlayerVida : MonoBehaviour
+public class PlayerVida : MonoBehaviour, IDamageable
 {
-    [Header("Configurações de Vida")]
-    public int vidaMaxima = 50;
-    public int vidaAtual;
+    public int totalCoracoes = 3;
+    public int coracoesAtuais;
 
-    [Header("Interface (opcional)")]
-    public Slider barraDeVida; // arraste um Slider do Canvas, se quiser
+    public Image[] coracoesUI;
 
     private Animator animator;
+    private bool vivo = true;
+
+    private bool invencivel = false;
+    public float tempoInvencivel = 0.8f;
 
     void Start()
     {
-        vidaAtual = vidaMaxima;
+        coracoesAtuais = totalCoracoes;
         animator = GetComponent<Animator>();
-        AtualizarBarra();
+        AtualizarCoracoes();
+    }
+
+    public void TakeEnergy(int dano)
+    {
+        TomarDano(dano);
     }
 
     public void TomarDano(int dano)
     {
-        vidaAtual -= dano;
-        if (vidaAtual < 0) vidaAtual = 0;
+        if (!vivo) return;
+        if (invencivel) return;
 
-        Debug.Log("Jogador tomou " + dano + " de dano. Vida restante: " + vidaAtual);
-        AtualizarBarra();
+        coracoesAtuais -= dano;
+        invencivel = true;
 
-        if (vidaAtual <= 0)
+        StartCoroutine(InvencivelPiscando());
+       
+        if (coracoesAtuais < 0) 
+            coracoesAtuais = 0;
+
+        AtualizarCoracoes();
+
+        if (coracoesAtuais <= 0)
+        {
             Morrer();
+        }
         else if (animator != null)
-            animator.Play("Hurt"); // se tiver animação de dano
+        {
+            animator.Play("Hurt");
+        }
+    }
+    
+    private IEnumerator InvencivelPiscando()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        float fim = Time.time + tempoInvencivel;
+
+        while (Time.time < fim)
+        {
+            sr.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            sr.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        invencivel = false;
+    }
+
+    void AtualizarCoracoes()
+    {
+        for (int i = 0; i < coracoesUI.Length; i++)
+            coracoesUI[i].enabled = (i < coracoesAtuais);
     }
 
     void Morrer()
     {
-        Debug.Log("Jogador morreu!");
-        if (animator != null)
-            animator.Play("Morrer");
+        vivo = false;
+        Debug.Log("Player morreu!");
 
-        // Exemplo: pode desativar movimento
-        var movement = GetComponent<PlayerMovement>();
-        if (movement != null) movement.enabled = false;
+        if (animator != null)
+            animator.Play("joreldeath");
+
+        var mov = GetComponent<PlayerMovement>();
+        if (mov != null)
+            mov.enabled = false;
+
+        StartCoroutine(GameOverDepoisDaAnimacao());
     }
 
-    void AtualizarBarra()
+    private IEnumerator GameOverDepoisDaAnimacao()
     {
-        if (barraDeVida != null)
-            barraDeVida.value = (float)vidaAtual / vidaMaxima;
+        yield return new WaitForSeconds(1f);
+        GameManager.instance.MostrarTelaGameOver(); // <- CORRETO
     }
 
     public void TakeDamage(int dano)

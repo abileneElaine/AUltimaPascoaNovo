@@ -7,6 +7,7 @@ public class CoinAnimation : MonoBehaviour
     public float floatFrequency = 3f;
 
     public int Score; //pontuação da moeda
+    public AudioClip somMoeda; // <-- SOM DA MOEDA
 
     private Vector3 startPos;
 
@@ -23,5 +24,16 @@ public class CoinAnimation : MonoBehaviour
         // Flutua para cima e para baixo
         float newY = Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
         transform.position = startPos + new Vector3(0, newY, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            // Toca o som usando o AudioSource do Player
+            collision.GetComponent<AudioSource>().PlayOneShot(somMoeda);
+
+            Destroy(gameObject);
+        }
     }
 }

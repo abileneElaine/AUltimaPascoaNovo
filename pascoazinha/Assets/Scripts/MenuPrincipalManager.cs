@@ -9,7 +9,7 @@ public class MenuPrincipal : MonoBehaviour
     
     public void Jogar()
     {
-        SceneManager.LoadScene("Fase 1");
+        SceneManager.LoadScene("CutsCene");
     }
 
     public void AbrirOpcoes()

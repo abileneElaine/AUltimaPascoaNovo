@@ -109,6 +109,7 @@ MonoBehaviour:
   floatAmplitude: 0.2
   floatFrequency: 3
   Score: 1
+  somMoeda: {fileID: 8300000, guid: c4e6eb5394dcdca43a0209fdafc82b6d, type: 3}
 --- !u!58 &8260694226668452725
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -188,6 +189,7 @@ MonoBehaviour:
   floatAmplitude: 0.2
   floatFrequency: 3
   Score: 0
+  somMoeda: {fileID: 0}
 --- !u!58 &6934791940925619134
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,10 +236,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: c4e6eb5394dcdca43a0209fdafc82b6d, type: 3}
+  m_Resource: {fileID: 8300000, guid: c4e6eb5394dcdca43a0209fdafc82b6d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.875
   m_Pitch: 1
   Loop: 0
   Mute: 0

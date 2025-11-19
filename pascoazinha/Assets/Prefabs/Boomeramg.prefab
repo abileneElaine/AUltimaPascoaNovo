@@ -13,11 +13,10 @@ GameObject:
   - component: {fileID: 1165370217292404706}
   - component: {fileID: 5572046784502867575}
   - component: {fileID: 4551768992113591880}
-  - component: {fileID: 1494334833430922355}
-  - component: {fileID: -3928235236483698267}
+  - component: {fileID: -4489396547062853005}
   m_Layer: 0
   m_Name: Boomeramg
-  m_TagString: Untagged
+  m_TagString: Cenoura
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,7 +176,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.20813012}
   m_Radius: 2.3174713
---- !u!114 &1494334833430922355
+--- !u!114 &-4489396547062853005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,23 +185,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8972330477186402184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b227848f207c699458af3f18e8794071, type: 3}
+  m_Script: {fileID: 11500000, guid: ed962de47f7f95543a3b89a7b8f7f6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 0.5
-  tipo: Normal
-  efeitoFogo: {fileID: 0}
-  efeitoGelo: {fileID: 0}
---- !u!114 &-3928235236483698267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8972330477186402184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 902ea0cabfbb69244bcfbd36be656782, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tipo: Boomerang
+  speed: 10
+  lifetime: 3

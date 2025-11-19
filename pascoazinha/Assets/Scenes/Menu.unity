@@ -1427,7 +1427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c21a459b7eeb924396b198a8a850174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nomedoLevel: Fase 1
+  nomedoLevel: CutsCene
   painelMenuInicial: {fileID: 1396558869}
   painelOpcoes: {fileID: 617423662}
 --- !u!4 &771242569
@@ -2044,7 +2044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1396558870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2814,7 +2814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2008526576
 RectTransform:
   m_ObjectHideFlags: 0

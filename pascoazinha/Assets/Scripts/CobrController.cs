@@ -171,15 +171,15 @@ public class CobraController : MonoBehaviour, IDamageable
     // -------------------------------------------------------------------------
     // ADIÇÃO: DAR DANO AO PLAYER
     // -------------------------------------------------------------------------
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (!_isAlive) return;
+    //private void OnCollisionEnter2D(Collision2D other)
+    //{
+        //if (!_isAlive) return;
 
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
-        }
-    }
+        //if (other.gameObject.CompareTag("Player"))
+        //{
+           // other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
+        //}
+   // }
 
     private void OnCollisionStay2D(Collision2D other)
     {
