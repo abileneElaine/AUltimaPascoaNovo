@@ -1,75 +1,164 @@
 using UnityEngine;
 
-public class MiniBossAI : MonoBehaviour
+public class MiniBossPatrulha : MonoBehaviour, IDamageable
 {
-    public Transform player;
-    public float speed = 2f;
-    public float attackDistance = 1.5f;
-    public int maxHealth = 5;
+    [Header("Referências")]
+    public Transform moveDestination;     // destino da patrulha (igual à cobra)
+    private Transform player;
+
+    [Header("Configurações")]
+    public float moveSpeed = 1.5f;
+    public float attackRange = 1.2f;      // distância para atacar
+    public int maxVida = 4;               // morre com 4 cenouras de gelo
+
+    [Header("Dano")]
+    public int danoAtaque = 1;            // dano dado pelo hitbox na animação
+
+    private Vector2 _initialPosition;
+    private Vector2 _target;
+    private Vector2 _direction;
+    private bool _returning = false;
+
+    private int vidaAtual;
+    private bool isAlive = true;
 
     private Animator anim;
-    private int currentHealth;
-    private bool isDead = false;
+    private SpriteRenderer sprite;
+
+    private float originalScaleX;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-        currentHealth = maxHealth;
+        sprite = GetComponent<SpriteRenderer>();
+
+        vidaAtual = maxVida;
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        _initialPosition = transform.position;
+        _target = moveDestination.position;
+
+        _direction = (_target - (Vector2)transform.position).normalized;
+
+        originalScaleX = transform.localScale.x;
     }
 
     void Update()
     {
-        if (isDead) return;
+        if (!isAlive) return;
 
-        float distance = Vector2.Distance(transform.position, player.position);
+        float distancia = Vector2.Distance(transform.position, player.position);
 
-        if (distance > attackDistance)
+        // --- ATACA SE O PLAYER ESTÁ PERTO ---
+        if (distancia <= attackRange)
         {
-            // Andando até o jogador
-            anim.SetBool("isWalking", true);
-            anim.SetBool("isAttacking", false);
+            anim.SetBool("isWalking", false);
+            anim.SetTrigger("Attack");   // a animação vai chamar o dano
+            OlharPara(player.position);
+            return;
+        }
 
-            transform.position = Vector2.MoveTowards(transform.position,
-                player.position,
-                speed * Time.deltaTime);
+        // --- PATRULHA SE O PLAYER ESTÁ LONGE ---
+        Patrulhar();
+    }
 
-            Flip();
+    // ------------------------------------------------------
+    // SISTEMA DE PATRULHA – IGUAL O DA COBRA
+    // ------------------------------------------------------
+    void Patrulhar()
+    {
+        anim.SetBool("isWalking", true);
+
+        if (!_returning)
+        {
+            if (Vector2.Distance(transform.position, _target) < 0.1f)
+            {
+                _returning = true;
+                _direction = (_initialPosition - (Vector2)transform.position).normalized;
+            }
         }
         else
         {
-            // Iniciar ataque
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isAttacking", true);
+            if (Vector2.Distance(transform.position, _initialPosition) < 0.1f)
+            {
+                _returning = false;
+                _direction = (_target - (Vector2)transform.position).normalized;
+            }
         }
+
+        OlharPara(transform.position + (Vector3)_direction);
+
+        transform.position += (Vector3)_direction * moveSpeed * Time.deltaTime;
     }
 
-    void Flip()
+    // ------------------------------------------------------
+    // DEIXAR O BOSS VIRADO PARA O ALVO
+    // ------------------------------------------------------
+    void OlharPara(Vector3 alvo)
     {
-        if ((player.position.x > transform.position.x && transform.localScale.x < 0) ||
-            (player.position.x < transform.position.x && transform.localScale.x > 0))
+        if ((alvo.x > transform.position.x && transform.localScale.x < 0) ||
+            (alvo.x < transform.position.x && transform.localScale.x > 0))
         {
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 
-    public void TakeDamage(int damage)
+    // ------------------------------------------------------
+    // TOMAR DANO (SÓ DE CENOURA DE GELO)
+    // ------------------------------------------------------
+    public void TakeEnergy(int amount)
     {
-        if (isDead) return;
+        TakeDamage(amount);
+    }
 
-        currentHealth -= damage;
+    public void TakeDamage(int dano)
+    {
+        if (!isAlive) return;
 
-        if (currentHealth <= 0)
+        vidaAtual -= dano;
+
+        sprite.color = Color.cyan; // hit azul (gelo)
+        Invoke("ResetColor", 0.15f);
+
+        if (vidaAtual <= 0)
         {
-            Dead();
+            Morrer();
         }
     }
 
-    void Dead()
+    void ResetColor()
     {
-        isDead = true;
-        anim.SetTrigger("Dead");
-        Destroy(gameObject, 2.5f);
+        sprite.color = Color.white;
+    }
+
+    void Morrer()
+    {
+        isAlive = false;
+        anim.SetTrigger("Die");
+        Destroy(gameObject, 1.5f);
+    }
+
+    // ------------------------------------------------------
+    // CAUSAR DANO NA ANIMAÇÃO
+    // ESTE MÉTODO É CHAMADO NO EVENTO DA ANIMAÇÃO "Attack"
+    // ------------------------------------------------------
+    public void HitPlayer()
+    {
+        if (!isAlive) return;
+
+        Collider2D col = Physics2D.OverlapCircle(transform.position, attackRange, LayerMask.GetMask("Player"));
+
+        if (col != null)
+        {
+            col.GetComponent<IDamageable>()?.TakeEnergy(danoAtaque);
+        }
+    }
+
+    // DEBUG DA ÁREA DE ATAQUE
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 5389b71faca2878499b3b1a004eadea9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - telaGameOver: {fileID: 5496516385402682696, guid: 0cb217ad8256ff546a9959077356eb3a, type: 3}
+  - telaVitoria: {fileID: 4039705419222825535, guid: 28767ce7acaa7584fae3cd7c3730f60b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

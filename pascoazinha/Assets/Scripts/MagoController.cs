@@ -16,6 +16,9 @@ public class MageController : MonoBehaviour
     private bool isDead = false;
     private bool atacando = false;
     private bool podeAtacar = true;
+    public GameObject RaizAtaque;
+    public Transform alvo; // ou "player"
+
 
     void Update()
     {
@@ -64,5 +67,13 @@ public class MageController : MonoBehaviour
         if (isDead) return;
         isDead = true;
         animator.SetTrigger("Die");
+    }
+}
+
+public class RaizAtaque
+{
+    public void DefinirAlvo(Transform player)
+    {
+        throw new System.NotImplementedException();
     }
 }
