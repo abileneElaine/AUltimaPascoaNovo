@@ -10,13 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5412314366029312617}
   - component: {fileID: 7146662454021305917}
-  - component: {fileID: 973367124835212061}
   - component: {fileID: 4339497890123516338}
   - component: {fileID: 8719038075124798113}
   - component: {fileID: 8180584996707800568}
   m_Layer: 0
   m_Name: CenouraFogo
-  m_TagString: Untagged
+  m_TagString: Cenoura
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,22 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &973367124835212061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677161110252432957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b227848f207c699458af3f18e8794071, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 0.5
-  tipo: Fogo
-  efeitoFogo: {fileID: 2488221787716238160, guid: 74e7f2182d4731a449900b5694bd8c95, type: 3}
-  efeitoGelo: {fileID: 0}
 --- !u!50 &4339497890123516338
 Rigidbody2D:
   serializedVersion: 5
@@ -165,7 +148,7 @@ CircleCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.0473319}

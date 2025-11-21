@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    
+    
     public float playerVelocity = 10f;            // Velocidade de movimento
     public float jumpForce = 10f;                 // Força do pulo
     public PlayerAnimationController playerAnim;  // Controlador de animações

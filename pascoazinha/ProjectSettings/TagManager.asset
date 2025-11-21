@@ -10,11 +10,12 @@ TagManager:
   - Coin
   - Cenoura
   - Projetil
+  - porta
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - ground
