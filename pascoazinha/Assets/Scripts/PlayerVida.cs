@@ -26,6 +26,17 @@ public class PlayerVida : MonoBehaviour, IDamageable
     {
         TomarDano(dano);
     }
+    public void Curar(int quantidade)
+    {
+        if (!vivo) return;
+
+        coracoesAtuais += quantidade;
+
+        if (coracoesAtuais > totalCoracoes)
+            coracoesAtuais = totalCoracoes;
+
+        AtualizarCoracoes();
+    }
 
     public void TomarDano(int dano)
     {
