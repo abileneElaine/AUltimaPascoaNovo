@@ -199,8 +199,17 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
             moveSpeed = 0;
             _collider2D.enabled = false;
             _spriteRenderer.color = Color.red;
-            Destroy(gameObject, 0.4f);
+            
+            _currentEnergy = 0;
+            Morrer();
         }
+
+        Debug.Log("MAGOOOO TOMOU DANO");
+    }
+
+    void Morrer()
+    {
+        Destroy(gameObject);
     }
 
     private IEnumerator HitBlink()
