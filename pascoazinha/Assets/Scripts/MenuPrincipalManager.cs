@@ -22,7 +22,7 @@ public class MenuPrincipalManager : MonoBehaviour
         float volG = PlayerPrefs.GetFloat("VolumeGeral", -10f);
 
         sliderMusica.value = volM;
-        sliderGeral.value = volG;
+       // sliderGeral.value = volG;
 
         
         

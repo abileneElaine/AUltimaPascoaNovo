@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
 
     private string proximaCena;
 
+    // ====== CHECKPOINT ======
+    private Vector3 posicaoCheckpoint;
+    private bool existeCheckpoint = false;
+
     void Awake()
     {
         if (instance == null)
@@ -65,8 +69,21 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(proximaCena);
     }
 
-    public void DefinirCheckpoint(Vector3 transformPosition)
+    // ========= CHECKPOINT =========
+    public void DefinirCheckpoint(Vector3 position)
     {
-        throw new System.NotImplementedException();
+        posicaoCheckpoint = position;
+        existeCheckpoint = true;
+        Debug.Log("CHECKPOINT DEFINIDO: " + position);
+    }
+
+    public bool TemCheckpoint()
+    {
+        return existeCheckpoint;
+    }
+
+    public Vector3 ObterCheckpoint()
+    {
+        return posicaoCheckpoint;
     }
 }
