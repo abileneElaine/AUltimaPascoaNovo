@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CenouraCongelante
       objectReference: {fileID: 0}
+    - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+      propertyPath: m_TagString
+      value: Cenoura
+      objectReference: {fileID: 0}
     - target: {fileID: 7117400062918567669, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.74539
@@ -708,6 +712,10 @@ PrefabInstance:
     - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_Name
       value: CenouraCongelante (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+      propertyPath: m_TagString
+      value: Cenoura
       objectReference: {fileID: 0}
     - target: {fileID: 7117400062918567669, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_LocalScale.x
@@ -777,6 +785,10 @@ PrefabInstance:
     - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_Name
       value: CenouraCongelante (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+      propertyPath: m_TagString
+      value: Cenoura
       objectReference: {fileID: 0}
     - target: {fileID: 7117400062918567669, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_LocalScale.x
@@ -908,6 +920,10 @@ PrefabInstance:
     - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_Name
       value: CenouraCongelante (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+      propertyPath: m_TagString
+      value: Cenoura
       objectReference: {fileID: 0}
     - target: {fileID: 7117400062918567669, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_LocalScale.x
@@ -1194,6 +1210,10 @@ PrefabInstance:
     - target: {fileID: 1715371197077735657, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_Offset.y
       value: 0.017209291
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175126465135576598, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
+      propertyPath: jumpForce
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6923176921722508303, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1955,6 +1975,10 @@ PrefabInstance:
     - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_Name
       value: CenouraCongelante (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+      propertyPath: m_TagString
+      value: Cenoura
       objectReference: {fileID: 0}
     - target: {fileID: 7117400062918567669, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_LocalScale.x
@@ -3272,6 +3296,14 @@ PrefabInstance:
     - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_Name
       value: CenouraCongelante
+      objectReference: {fileID: 0}
+    - target: {fileID: 601010245718231309, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+      propertyPath: m_TagString
+      value: Cenoura
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495483316962883250, guid: 39008c43110181246878fc2f3c25c154, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7117400062918567669, guid: 39008c43110181246878fc2f3c25c154, type: 3}
       propertyPath: m_LocalScale.x
