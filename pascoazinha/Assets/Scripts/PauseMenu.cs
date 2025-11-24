@@ -5,6 +5,13 @@ public class PauseMenu : MonoBehaviour
     public GameObject MenuDePausa;
     public bool isPaused;
 
+    void Start()
+    {
+        // Garante que o menu começa escondido
+        MenuDePausa.SetActive(false);
+        isPaused = false;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -19,14 +26,14 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         MenuDePausa.SetActive(true);
-        Time.timeScale = 0f; // congela o jogo
+        Time.timeScale = 0f;
         isPaused = true;
     }
 
     public void Resume()
     {
         MenuDePausa.SetActive(false);
-        Time.timeScale = 1f; // volta ao normal
+        Time.timeScale = 1f;
         isPaused = false;
     }
 }
