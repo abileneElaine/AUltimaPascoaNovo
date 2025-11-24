@@ -15,13 +15,13 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
     [SerializeField] private Transform moveDestination;
 
     [Header("Ataque")]
-    public float distanciaAtaque = 3f;     // Distância mínima para atacar
-    public float tempoEntreAtaques = 1.5f; // Delay entre ataques
+    public float distanciaAtaque = 3f;
+    public float tempoEntreAtaques = 1.5f;
 
     [Header("Raízes/Projétil")]
-    public GameObject raizPrefab;          // Prefab da raiz com DamageArea
-    public Transform pontoDeSaida;         // Onde a raiz começa
-    public float tempoCrescimento = 0.5f;  // Tempo que a raiz leva para crescer
+    public GameObject raizPrefab;
+    public Transform pontoDeSaida;
+    public float tempoCrescimento = 0.5f;
 
     [Header("Referências")]
     public Animator animator;
@@ -75,9 +75,6 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         MovePlatform();
     }
 
-    // ---------------------------------------------------
-    // Verifica se o player está perto para atacar
-    // ---------------------------------------------------
     private void CheckAttack()
     {
         if (!podeAtacar) return;
@@ -88,14 +85,10 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         }
     }
 
-    // ---------------------------------------------------
-    // Ataque: animação + raiz que causa dano
-    // ---------------------------------------------------
     private IEnumerator Atacar()
     {
         podeAtacar = false;
 
-        // Vira para o player
         if (shouldFlip)
         {
             Vector3 escala = transform.localScale;
@@ -105,19 +98,15 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
             transform.localScale = escala;
         }
 
-        // Toca animação de ataque
         animator.SetTrigger("Attack");
 
-        // Instancia a raiz se estiver tudo configurado
         if (raizPrefab != null && pontoDeSaida != null)
         {
             GameObject raiz = Instantiate(raizPrefab, pontoDeSaida.position, Quaternion.identity);
 
-            // Faz a raiz mirar para o player
             Vector2 direcao = (player.position - pontoDeSaida.position).normalized;
             raiz.transform.right = direcao;
 
-            // Faz a raiz crescer visualmente
             StartCoroutine(CrescerRaiz(raiz.transform));
         }
 
@@ -125,17 +114,14 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         podeAtacar = true;
     }
 
-    // ---------------------------------------------------
-    // Coroutine para o efeito visual de crescimento da raiz
-    // ---------------------------------------------------
     private IEnumerator CrescerRaiz(Transform raiz)
     {
         Vector3 escalaInicial = raiz.localScale;
-        escalaInicial.x = 0.1f; // começa quase invisível
+        escalaInicial.x = 0.1f;
         raiz.localScale = escalaInicial;
 
         Vector3 escalaFinal = raiz.localScale;
-        escalaFinal.x = 1f; // tamanho final da raiz (ajuste conforme sprite)
+        escalaFinal.x = 1f;
 
         float tempo = 0f;
         while (tempo < tempoCrescimento)
@@ -146,14 +132,10 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         }
         raiz.localScale = escalaFinal;
 
-        // Mantém a raiz ativa por 1 segundo antes de destruir
         yield return new WaitForSeconds(1f);
         Destroy(raiz.gameObject);
     }
 
-    // ---------------------------------------------------
-    // Patrulha com flip automático
-    // ---------------------------------------------------
     private void MovePlatform()
     {
         if (!_isReturning)
@@ -183,28 +165,32 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         }
     }
 
-    // ---------------------------------------------------
-    // Recebe dano
-    // ---------------------------------------------------
+    // -------------------------------------------------------------------------
+    //  LÓGICA DE DANO COMPLETA (mesma usada no MiniBoss)
+    // -------------------------------------------------------------------------
     public void TakeEnergy(int dano)
     {
         if (!_isAlive) return;
 
         _currentEnergy -= dano;
+
         StartCoroutine(HitBlink());
 
         if (_currentEnergy <= 0)
         {
+            _currentEnergy = 0;
+
             _isAlive = false;
             moveSpeed = 0;
             _collider2D.enabled = false;
+
             _spriteRenderer.color = Color.red;
-            
-            _currentEnergy = 0;
-            Morrer();
+
+            Destroy(gameObject, 0.4f);
         }
 
-        Debug.Log("MAGOOOO TOMOU DANO");
+        if (_currentEnergy > maxEnergy)
+            _currentEnergy = maxEnergy;
     }
 
     void Morrer()
@@ -225,4 +211,32 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(blinkHitDuration);
         _spriteRenderer.color = Color.white;
     }
+    
+    // -------------------------------------------------------------------------
+// DAR DANO AO PLAYER IGUAL AO MINIBOSS
+// -------------------------------------------------------------------------
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (!_isAlive) return;
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
+        }
+    }
+
+// -------------------------------------------------------------------------
+// RECEBER DANO DA CENOURA (Trigger) — MESMA LÓGICA DO MINIBOSS
+// -------------------------------------------------------------------------
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!_isAlive) return;
+
+        if (other.CompareTag("Cenoura"))
+        {
+            TakeEnergy(1);                 // dano da cenoura (igual do MiniBoss)
+            Destroy(other.gameObject);     // destrói a cenoura ao bater
+        }
+    }
+
 }

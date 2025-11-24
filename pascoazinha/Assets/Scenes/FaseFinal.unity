@@ -1217,11 +1217,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6923176921722508303, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.38
+      value: 35.87
       objectReference: {fileID: 0}
     - target: {fileID: 6923176921722508303, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.07
+      value: 3.49
       objectReference: {fileID: 0}
     - target: {fileID: 6923176921722508303, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23010,6 +23010,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1065236303271726079, guid: 83918f235f7772f48acb5b2c71dc6351, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2071321077}
+    - target: {fileID: 1065236303271726079, guid: 83918f235f7772f48acb5b2c71dc6351, type: 3}
+      propertyPath: maxEnergy
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065236303271726079, guid: 83918f235f7772f48acb5b2c71dc6351, type: 3}
       propertyPath: distanciaAtaque
       value: 5
       objectReference: {fileID: 0}
@@ -23024,6 +23032,10 @@ PrefabInstance:
     - target: {fileID: 2911185798388448116, guid: 83918f235f7772f48acb5b2c71dc6351, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911185798388448116, guid: 83918f235f7772f48acb5b2c71dc6351, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2911185798388448121, guid: 83918f235f7772f48acb5b2c71dc6351, type: 3}
       propertyPath: m_LocalPosition.x

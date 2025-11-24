@@ -1,28 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class MiniBossPatrulha : MonoBehaviour, IDamageable
 {
-    public int maxEnergy;
-    public int damage;
+    public int maxEnergy;   // <- você já tinha
+    public int damage;      // <- dano ao player
     public float moveSpeed;
     public bool useTransform;
     public bool shouldFlip;
 
-    [Header("Patrulha")]
     [SerializeField] private Vector2 movePosition;
     [SerializeField] private Transform moveDestination;
-
-    [Header("Ataque")]
-    public float distanciaAtaque = 2f;     // distância do player para atacar
-    public float tempoEntreAtaques = 1.2f; // delay entre ataques
-    private bool podeAtacar = true;
-
-    [Header("Referências")]
-    public Animator animator;
-    public Transform player;
-
-    [Header("Feedback de Dano")]
     [SerializeField] private int blinkHitTimes;
     [SerializeField] private float blinkHitDuration;
 
@@ -32,14 +21,15 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
     private bool _isReturning;
     private float _originalLocalScaleX;
     private int _currentEnergy;
+    private Animator _animator;
     private bool _isAlive;
     private Collider2D _collider2D;
-    private SpriteRenderer _spriteRenderer;
     private AudioSource _audioSource;
+    private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         _collider2D = GetComponent<Collider2D>();
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,16 +38,16 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
 
         if (shouldFlip) _originalLocalScaleX = transform.localScale.x;
 
-        if (player == null)
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-
         if (useTransform)
+        {
             _moveTarget = moveDestination.localPosition;
+        }
         else
+        {
             _moveTarget = movePosition;
+        }
 
         _initialPosition = transform.position;
-
         _currentMoveDirection = (_initialPosition + _moveTarget - (Vector2)transform.position).normalized;
 
         _currentEnergy = maxEnergy;
@@ -65,56 +55,9 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (!_isAlive) return;
-
-        CheckAttack();   // 🔥 NOVO - Verifica se o player está perto para atacar
-
-        MovePlatform();
+        if (_isAlive) MovePlatform();
     }
 
-    // ------------------------------------------------------------------------
-    // ATAQUE – Quando o player está perto
-    // ------------------------------------------------------------------------
-    private void CheckAttack()
-    {
-        if (!podeAtacar) return;
-
-        float distancia = Vector2.Distance(transform.position, player.position);
-
-        if (distancia <= distanciaAtaque)
-        {
-            StartCoroutine(Atacar());
-        }
-    }
-
-    private IEnumerator Atacar()
-    {
-        podeAtacar = false;
-
-        // vira para o player
-        if (shouldFlip)
-        {
-            Vector3 escala = transform.localScale;
-            escala.x = (player.position.x > transform.position.x)
-                ? Mathf.Abs(escala.x)
-                : -Mathf.Abs(escala.x);
-            transform.localScale = escala;
-        }
-
-        // toca animação de ataque
-        animator.SetTrigger("Attack");
-
-        // dá dano ao player
-        player.GetComponent<IDamageable>()?.TakeEnergy(damage);
-
-        yield return new WaitForSeconds(tempoEntreAtaques);
-
-        podeAtacar = true;
-    }
-
-    // ------------------------------------------------------------------------
-    // PATRULHA (igual ao seu código original)
-    // ------------------------------------------------------------------------
     private void MovePlatform()
     {
         if (!_isReturning)
@@ -134,20 +77,53 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
             }
         }
 
-        // Move o inimigo
-        transform.position += (Vector3)_currentMoveDirection * moveSpeed * Time.deltaTime;
-
-        // 🔥 Flip da sprite conforme a direção
         if (shouldFlip)
         {
-            Vector3 escala = transform.localScale;
-            if (_currentMoveDirection.x > 0)
-                escala.x = Mathf.Abs(_originalLocalScaleX);
-            else if (_currentMoveDirection.x < 0)
-                escala.x = -Mathf.Abs(_originalLocalScaleX);
-            transform.localScale = escala;
+            if (_isReturning)
+                transform.localScale =
+                    new Vector3(-_originalLocalScaleX, transform.localScale.y, transform.localScale.z);
+            else
+                transform.localScale = new Vector3(_originalLocalScaleX, transform.localScale.y, transform.localScale.z);
         }
+
+        transform.position += (Vector3)_currentMoveDirection * moveSpeed * Time.deltaTime;
     }
+
+
+    // -------------------------------------------------------------------------
+    // ADIÇÃO: RECEBER DANO DA CENOURA
+    // -------------------------------------------------------------------------
+    public void TakeEnergy(int dano)  // já existia por causa do IDamageable
+    {
+        if (!_isAlive) return;
+
+        _currentEnergy -= dano;
+
+        // Fica vermelho ao ser atingida
+        StartCoroutine(HitBlink());  
+
+        if (_currentEnergy <= 0)
+        {
+            _currentEnergy = 0;
+
+            _isAlive = false;
+
+            _collider2D.enabled = false;
+            moveSpeed = 0;
+
+            // cor vermelha da morte
+            _spriteRenderer.color = Color.red;
+
+            // desaparecer após 0.4s
+            Destroy(gameObject, 0.4f);
+        }
+
+        // trava no máximo
+        if (_currentEnergy > maxEnergy)
+            _currentEnergy = maxEnergy;
+    }
+
+    
 
 
     private IEnumerator HitBlink()
@@ -164,8 +140,71 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
         _spriteRenderer.color = Color.white;
     }
 
-    public void TakeEnergy(int damage)
+
+    private void OnDrawGizmos()
     {
-        throw new System.NotImplementedException();
+        if (Application.isPlaying)
+        {
+            if (useTransform)
+            {
+                Debug.DrawLine(_initialPosition, (Vector3)_initialPosition + moveDestination.localPosition, Color.yellow);
+            }
+            else
+            {
+                Debug.DrawLine(_initialPosition, (Vector3)_initialPosition + (Vector3)movePosition, Color.red);
+            }
+        }
+        else
+        {
+            if (useTransform)
+            {
+                Debug.DrawLine(transform.position, transform.position + moveDestination.localPosition, Color.yellow);
+            }
+            else
+            {
+                Debug.DrawLine(transform.position, transform.position + (Vector3)movePosition, Color.red);
+            }
+        }
     }
+
+
+    // -------------------------------------------------------------------------
+    // ADIÇÃO: DAR DANO AO PLAYER
+    // -------------------------------------------------------------------------
+    //private void OnCollisionEnter2D(Collision2D other)
+    //{
+        //if (!_isAlive) return;
+
+        //if (other.gameObject.CompareTag("Player"))
+        //{
+           // other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
+        //}
+   // }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (!_isAlive) return;
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
+        }
+    }
+    
+    // -------------------------------------------------------------------------
+// ADIÇÃO: RECEBER DANO DA CENOURA (Trigger)
+// -------------------------------------------------------------------------
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!_isAlive) return;
+
+        if (other.CompareTag("Cenoura"))
+        {
+            TakeEnergy(1);   // dano da cenoura (pode mudar depois)
+            Destroy(other.gameObject); // destruir a cenoura ao bater
+        }
+    }
+    
+    
+
 }

@@ -16,20 +16,17 @@ public class CenouraProjetil : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
             return;
 
-        // Acertou inimigo
-        if (collision.collider.CompareTag("Enemy"))
+        // Procura qualquer objeto que tenha IDamageable (pai ou próprio)
+        IDamageable dano = collision.collider.GetComponentInParent<IDamageable>();
+
+        if (dano != null)
         {
-            // Pega o IDamageable no inimigo OU no pai dele
-            IDamageable dano = collision.collider.GetComponentInParent<IDamageable>();
-
-            if (dano != null)
-                dano.TakeEnergy(1);  // <-- chama sua função correta
-
+            dano.TakeEnergy(1);
             Destroy(gameObject);
             return;
         }
 
-        // Bateu em outra coisa
+        // Bateu em parede/superfície
         Destroy(gameObject);
     }
 }
