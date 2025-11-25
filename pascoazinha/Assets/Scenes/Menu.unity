@@ -347,7 +347,6 @@ GameObject:
   - component: {fileID: 569053936}
   - component: {fileID: 569053935}
   - component: {fileID: 569053934}
-  - component: {fileID: 569053938}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -440,22 +439,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &569053938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569053933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6acbaf63893cb4688c13af14597dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicSounds:
-  - name: Music Slider
-    clip: {fileID: 8300000, guid: 8bdddbf00457ee64691aee6684790cd8, type: 3}
-  musicSource: {fileID: 1895862648}
 --- !u!1 &617423662 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6011280614579200555, guid: 70eff2e9efbfee046995cfe1a30c090a, type: 3}
@@ -1427,11 +1410,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863460776}
   m_CullTransparentMesh: 1
---- !u!82 &1895862648 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1687409800460251186, guid: 40446c9c107ec17459505a6306190009, type: 3}
-  m_PrefabInstance: {fileID: 1207626968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2008526575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,6 +2141,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 257510109}
   - {fileID: 569053937}
-  - {fileID: 12011345}
   - {fileID: 288648341534966783}
   - {fileID: 1207626968}
+  - {fileID: 12011345}
