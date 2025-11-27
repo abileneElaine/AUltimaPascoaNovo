@@ -29,11 +29,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Sempre limpe referências antigas (de cenas destruidas)
+        telaGameOver = null;
+        telaVitoria = null;
+
+        // Procura UIs automaticamente na cena nova
+        telaVitoria = GameObject.Find("TelaVitoria");
+        telaGameOver = GameObject.Find("TelaGameOver");
+
+        // Desativa por segurança
+        if (telaGameOver != null)
+            telaGameOver.SetActive(false);
+
+        if (telaVitoria != null)
+            telaVitoria.SetActive(false);
+
+        Time.timeScale = 1f;
+    }
+
     // ========= GAME OVER =========
     public void MostrarTelaGameOver()
     {
         Time.timeScale = 0f;
-        telaGameOver.SetActive(true);
+
+        if (telaGameOver != null)
+            telaGameOver.SetActive(true);
+        else
+            Debug.LogError("TelaGameOver não encontrada na cena!");
+
         StartCoroutine(AguardarTeclaReiniciarFase());
     }
 
@@ -54,7 +89,12 @@ public class GameManager : MonoBehaviour
         proximaCena = nextScene;
 
         Time.timeScale = 0f;
-        telaVitoria.SetActive(true);
+
+        if (telaVitoria != null)
+            telaVitoria.SetActive(true);
+        else
+            Debug.LogError("TelaVitoria não encontrada na cena!");
+
         StartCoroutine(AguardarTeclaParaProximaFase());
     }
 

@@ -17,15 +17,25 @@ public class PlayerVida : MonoBehaviour, IDamageable
 
     void Start()
     {
+        // RESET TOTAL AO RENASCER
+        vivo = true;
+        invencivel = false;
+
         coracoesAtuais = totalCoracoes;
-        animator = GetComponent<Animator>();
         AtualizarCoracoes();
+
+        animator = GetComponent<Animator>();
     }
+
+    // =============================
+    //      CURA / DANO
+    // =============================
 
     public void TakeEnergy(int dano)
     {
         TomarDano(dano);
     }
+
     public void Curar(int quantidade)
     {
         if (!vivo) return;
@@ -47,8 +57,8 @@ public class PlayerVida : MonoBehaviour, IDamageable
         invencivel = true;
 
         StartCoroutine(InvencivelPiscando());
-       
-        if (coracoesAtuais < 0) 
+
+        if (coracoesAtuais < 0)
             coracoesAtuais = 0;
 
         AtualizarCoracoes();
@@ -62,7 +72,7 @@ public class PlayerVida : MonoBehaviour, IDamageable
             animator.Play("Hurt");
         }
     }
-    
+
     private IEnumerator InvencivelPiscando()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -86,9 +96,16 @@ public class PlayerVida : MonoBehaviour, IDamageable
             coracoesUI[i].enabled = (i < coracoesAtuais);
     }
 
+    // =============================
+    //            MORTE
+    // =============================
+
     void Morrer()
     {
+        if (!vivo) return;  // evita morte dupla
         vivo = false;
+        invencivel = false; // garante reset da invencibilidade
+
         Debug.Log("Player morreu!");
 
         if (animator != null)
@@ -104,11 +121,11 @@ public class PlayerVida : MonoBehaviour, IDamageable
     private IEnumerator GameOverDepoisDaAnimacao()
     {
         yield return new WaitForSeconds(1f);
-        GameManager.instance.MostrarTelaGameOver(); // <- CORRETO
+        GameManager.instance.MostrarTelaGameOver();
     }
 
     public void TakeDamage(int dano)
     {
-        throw new System.NotImplementedException();
+        TomarDano(dano);
     }
 }
