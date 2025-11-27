@@ -57,12 +57,13 @@ public class GameManager : MonoBehaviour
     // ========= GAME OVER =========
     public void MostrarTelaGameOver()
     {
-        Time.timeScale = 0f;
 
         if (telaGameOver != null)
             telaGameOver.SetActive(true);
         else
             Debug.LogError("TelaGameOver não encontrada na cena!");
+        
+        Time.timeScale = 0f;
 
         StartCoroutine(AguardarTeclaReiniciarFase());
     }
@@ -111,6 +112,14 @@ public class GameManager : MonoBehaviour
         existeCheckpoint = true;
         Debug.Log("CHECKPOINT DEFINIDO: " + position);
     }
+    
+    public void ResetarCheckpoint()
+    {
+        existeCheckpoint = false;
+        posicaoCheckpoint = Vector3.zero;
+        Debug.Log("Checkpoint resetado para nova fase");
+    }
+
 
     public bool TemCheckpoint()
     {

@@ -29,6 +29,20 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Tempo (s) que leva para descer")]
     public float deathDropDuration = 0.15f;
 
+    private Vector3 posicaoInicial;
+
+    private void Awake()
+    {
+        // Salva a posição inicial do player (onde ele está no editor)
+        posicaoInicial = transform.position;
+    }
+
+    
+
+    
+    
+    
+    
     private void Update()
     {
         // Se estiver morto, não executar nada
