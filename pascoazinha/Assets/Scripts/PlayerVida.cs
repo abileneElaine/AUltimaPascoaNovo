@@ -17,25 +17,15 @@ public class PlayerVida : MonoBehaviour, IDamageable
 
     void Start()
     {
-        // RESET TOTAL AO RENASCER
-        vivo = true;
-        invencivel = false;
-
         coracoesAtuais = totalCoracoes;
-        AtualizarCoracoes();
-
         animator = GetComponent<Animator>();
+        AtualizarCoracoes();
     }
-
-    // =============================
-    //      CURA / DANO
-    // =============================
 
     public void TakeEnergy(int dano)
     {
         TomarDano(dano);
     }
-
     public void Curar(int quantidade)
     {
         if (!vivo) return;
@@ -57,7 +47,7 @@ public class PlayerVida : MonoBehaviour, IDamageable
         invencivel = true;
 
         StartCoroutine(InvencivelPiscando());
-
+       
         if (coracoesAtuais < 0)
             coracoesAtuais = 0;
 
@@ -72,7 +62,7 @@ public class PlayerVida : MonoBehaviour, IDamageable
             animator.Play("Hurt");
         }
     }
-
+   
     private IEnumerator InvencivelPiscando()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -96,36 +86,43 @@ public class PlayerVida : MonoBehaviour, IDamageable
             coracoesUI[i].enabled = (i < coracoesAtuais);
     }
 
-    // =============================
-    //            MORTE
-    // =============================
-
     void Morrer()
     {
-        if (!vivo) return;  // evita morte dupla
-        vivo = false;
-        invencivel = false; // garante reset da invencibilidade
+        if (!vivo) return; // evita chamar mais de uma vez
 
+        vivo = false;
         Debug.Log("Player morreu!");
 
-        if (animator != null)
-            animator.Play("joreldeath");
-
+        // Para a movimentação
         var mov = GetComponent<PlayerMovement>();
         if (mov != null)
             mov.enabled = false;
 
-        StartCoroutine(GameOverDepoisDaAnimacao());
+        // Toca animação
+        if (animator != null)
+            animator.Play("joreldeath", 0, 0);
+
+        // Chama o GameOver SEM depender de nada da animação
+        StartCoroutine(GameOverDelay());
     }
+    private IEnumerator GameOverDelay()
+    {
+        // Espera a animação terminar SEM travar o jogo
+        yield return new WaitForSecondsRealtime(1f); 
+
+        // Chama Game Over CERTINHO
+        GameManager.instance.MostrarTelaGameOver();
+    }
+
 
     private IEnumerator GameOverDepoisDaAnimacao()
     {
         yield return new WaitForSeconds(1f);
-        GameManager.instance.MostrarTelaGameOver();
+        GameManager.instance.MostrarTelaGameOver(); // <- CORRETO
     }
 
     public void TakeDamage(int dano)
     {
-        TomarDano(dano);
+        throw new System.NotImplementedException();
     }
 }
