@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 998446787033423438}
   - component: {fileID: 7419371109604843839}
   m_Layer: 5
-  m_Name: GameOver
-  m_TagString: Untagged
+  m_Name: TelaGameOver
+  m_TagString: Derrota
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7699475781293533298
 RectTransform:
   m_ObjectHideFlags: 0

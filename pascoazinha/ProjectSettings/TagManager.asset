@@ -11,6 +11,9 @@ TagManager:
   - Cenoura
   - Projetil
   - porta
+  - Vitoria
+  - Derrota
+  - TelaGameOver
   layers:
   - Default
   - TransparentFX

@@ -6,21 +6,40 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!ativado && other.CompareTag("Player"))
+        Debug.Log("[Checkpoint] Trigger entrou: " + other.name);
+
+        if (ativado) 
         {
-            ativado = true;
+            Debug.Log("[Checkpoint] Já ativado, ignorando.");
+            return;
+        }
 
-            // Salva posição no GameManager
-            GameManager.instance.DefinirCheckpoint(transform.position);
+        if (!other.CompareTag("Player"))
+        {
+            Debug.Log("[Checkpoint] Quem entrou não é Player.");
+            return;
+        }
 
-            // Recupera vida do player
-            PlayerVida vida = other.GetComponent<PlayerVida>();
-            if (vida != null)
-            {
-                vida.coracoesAtuais = vida.totalCoracoes;
-                vida.SendMessage("AtualizarCoracoes");
-                Debug.Log("Corações restaurados!");
-            }
+        ativado = true;
+        Vector3 savePos = transform.position;
+        // salva um pouco acima para evitar spawn dentro do chão
+        savePos += Vector3.up * 0.1f;
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.DefinirCheckpoint(savePos);
+        }
+        else
+        {
+            Debug.LogError("[Checkpoint] GameManager.instance é null!");
+        }
+
+        PlayerVida vida = other.GetComponentInParent<PlayerVida>();
+        if (vida != null)
+        {
+            vida.coracoesAtuais = vida.totalCoracoes;
+            vida.SendMessage("AtualizarCoracoes", SendMessageOptions.DontRequireReceiver);
+            Debug.Log("[Checkpoint] Corações restaurados!");
         }
     }
 }

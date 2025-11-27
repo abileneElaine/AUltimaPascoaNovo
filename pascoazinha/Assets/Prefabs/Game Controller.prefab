@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5389b71faca2878499b3b1a004eadea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  telaGameOver: {fileID: 0}
-  telaVitoria: {fileID: 0}
+  telaGameOver: {fileID: 2109233049090358171, guid: 0cb217ad8256ff546a9959077356eb3a, type: 3}
+  telaVitoria: {fileID: 4188548755888568084, guid: 28767ce7acaa7584fae3cd7c3730f60b, type: 3}
