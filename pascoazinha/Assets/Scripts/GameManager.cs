@@ -38,37 +38,26 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
-    private GameObject EncontrarObjetoMesmoDesativado(string nome)
-    {
-        Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>();
-
-        foreach (Transform t in objs)
-        {
-            if (t.hideFlags == HideFlags.NotEditable || t.hideFlags == HideFlags.HideAndDontSave)
-                continue;
-
-            if (t.name == nome)
-                return t.gameObject;
-        }
-
-        return null;
-    }
-
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Encontra as telas mesmo se estiverem DESATIVADAS
-        telaVitoria = EncontrarObjetoMesmoDesativado("TelaVitoria");
-        telaGameOver = EncontrarObjetoMesmoDesativado("TelaGameOver");
+        // Sempre limpe referências antigas (de cenas destruidas)
+        telaGameOver = null;
+        telaVitoria = null;
 
+        // Procura UIs automaticamente na cena nova
+        telaVitoria = GameObject.Find("TelaVitoria");
+        telaGameOver = GameObject.Find("TelaGameOver");
+
+        // Desativa por segurança
         if (telaGameOver != null)
             telaGameOver.SetActive(false);
 
         if (telaVitoria != null)
             telaVitoria.SetActive(false);
-    }
 
+        Time.timeScale = 1f;
+    }
 
     // ========= GAME OVER =========
     public void MostrarTelaGameOver()
