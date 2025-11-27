@@ -4,31 +4,56 @@ using System.Collections;
 
 public class PlayerVida : MonoBehaviour, IDamageable
 {
+    [Header("Vida")]
     public int totalCoracoes = 3;
     public int coracoesAtuais;
 
+    [Header("UI")]
     public Image[] coracoesUI;
 
-    private Animator animator;
-    private bool vivo = true;
-
-    private bool invencivel = false;
+    [Header("Estado")]
+    public bool vivo = true;
+    public bool invencivel = false;
     public float tempoInvencivel = 0.8f;
+
+    private Animator animator;
+    private SpriteRenderer sr;
 
     void Start()
     {
-        // RESET TOTAL AO RENASCER
+        // 🔥 FIX ABSOLUTO: impede corrotinas da cena anterior de sobreviverem
+        StopAllCoroutines();
+
         vivo = true;
         invencivel = false;
 
         coracoesAtuais = totalCoracoes;
-        AtualizarCoracoes();
 
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+
+        AtualizarCoracoes();
+    }
+
+    // chamado pelo GameManager ao respawn
+    public void OnRespawn()
+    {
+        StopAllCoroutines();        // 🔥 FIX ANTI-BUG
+        vivo = true;
+        invencivel = false;
+
+        if (sr != null)
+            sr.enabled = true;
+
+        var mov = GetComponent<PlayerMovement>();
+        if (mov != null)
+            mov.enabled = true;
+
+        AtualizarCoracoes();
     }
 
     // =============================
-    //      CURA / DANO
+    //           DANO / CURA
     // =============================
 
     public void TakeEnergy(int dano)
@@ -36,12 +61,16 @@ public class PlayerVida : MonoBehaviour, IDamageable
         TomarDano(dano);
     }
 
-    public void Curar(int quantidade)
+    public void TakeDamage(int dano)
+    {
+        TomarDano(dano);
+    }
+
+    public void Curar(int qtd)
     {
         if (!vivo) return;
 
-        coracoesAtuais += quantidade;
-
+        coracoesAtuais += qtd;
         if (coracoesAtuais > totalCoracoes)
             coracoesAtuais = totalCoracoes;
 
@@ -54,46 +83,44 @@ public class PlayerVida : MonoBehaviour, IDamageable
         if (invencivel) return;
 
         coracoesAtuais -= dano;
-        invencivel = true;
-
-        StartCoroutine(InvencivelPiscando());
 
         if (coracoesAtuais < 0)
             coracoesAtuais = 0;
 
         AtualizarCoracoes();
 
+        invencivel = true;
+        StartCoroutine(InvencivelPiscando());
+
         if (coracoesAtuais <= 0)
         {
             Morrer();
         }
-        else if (animator != null)
+        else
         {
-            animator.Play("Hurt");
+            if (animator != null)
+                animator.Play("Hurt");
         }
     }
 
     private IEnumerator InvencivelPiscando()
     {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-
         float fim = Time.time + tempoInvencivel;
 
         while (Time.time < fim)
         {
-            sr.enabled = false;
-            yield return new WaitForSeconds(0.1f);
-            sr.enabled = true;
-            yield return new WaitForSeconds(0.1f);
+            if (sr != null)
+            {
+                sr.enabled = false;
+                yield return new WaitForSeconds(0.1f);
+                sr.enabled = true;
+                yield return new WaitForSeconds(0.1f);
+            }
+            else
+                yield return null;
         }
 
         invencivel = false;
-    }
-
-    void AtualizarCoracoes()
-    {
-        for (int i = 0; i < coracoesUI.Length; i++)
-            coracoesUI[i].enabled = (i < coracoesAtuais);
     }
 
     // =============================
@@ -102,9 +129,9 @@ public class PlayerVida : MonoBehaviour, IDamageable
 
     void Morrer()
     {
-        if (!vivo) return;  // evita morte dupla
+        if (!vivo) return;
         vivo = false;
-        invencivel = false; // garante reset da invencibilidade
+        invencivel = false;
 
         Debug.Log("Player morreu!");
 
@@ -116,16 +143,26 @@ public class PlayerVida : MonoBehaviour, IDamageable
             mov.enabled = false;
 
         StartCoroutine(GameOverDepoisDaAnimacao());
+        
+        
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private IEnumerator GameOverDepoisDaAnimacao()
     {
         yield return new WaitForSeconds(1f);
+        Debug.Log("Game Over");
+        // 🔥 nunca mais falha, pois invencibilidade anterior não existe mais
         GameManager.instance.MostrarTelaGameOver();
     }
 
-    public void TakeDamage(int dano)
+    // =============================
+    //           INTERFACE
+    // =============================
+
+    void AtualizarCoracoes()
     {
-        TomarDano(dano);
+        for (int i = 0; i < coracoesUI.Length; i++)
+            coracoesUI[i].enabled = (i < coracoesAtuais);
     }
 }
