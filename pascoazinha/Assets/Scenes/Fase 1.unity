@@ -19505,6 +19505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: COBRAPRAUSAR (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6516210715418232084, guid: 9b3a32a6c719c6649a704f37699a4d17, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6516210715418232089, guid: 9b3a32a6c719c6649a704f37699a4d17, type: 3}
       propertyPath: m_LocalPosition.x
       value: 71.21
@@ -22272,6 +22276,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: COBRAPRAUSAR
       objectReference: {fileID: 0}
+    - target: {fileID: 6516210715418232084, guid: 9b3a32a6c719c6649a704f37699a4d17, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6516210715418232089, guid: 9b3a32a6c719c6649a704f37699a4d17, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.40703297
@@ -22568,11 +22576,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6923176921722508303, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.45
+      value: -12.19
       objectReference: {fileID: 0}
     - target: {fileID: 6923176921722508303, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.99
+      value: 4.93
       objectReference: {fileID: 0}
     - target: {fileID: 6923176921722508303, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: m_LocalPosition.z

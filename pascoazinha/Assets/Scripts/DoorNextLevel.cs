@@ -16,6 +16,8 @@ public class DoorNextLevel : MonoBehaviour
         }
 
         // Mostra a tela de vitória e aguarda tecla para próxima fase
+        Vector3 minhaPosicao = new Vector3(-13f, 5f, 0f);
+        GameManager.instance.DefinirCheckpoint(minhaPosicao);
         GameManager.instance.MostrarTelaVitoria(nextSceneName);
     }
 }
