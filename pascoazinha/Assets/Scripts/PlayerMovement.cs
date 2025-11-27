@@ -33,14 +33,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        // Salva a posição inicial do player (onde ele está no editor)
-        posicaoInicial = transform.position;
+        // Salva a posição inicial do player como checkpoint, caso ainda não exista
+        if (GameManager.instance != null && !GameManager.instance.TemCheckpoint())
+        {
+            GameManager.instance.DefinirCheckpoint(transform.position);
+            Debug.Log("Checkpoint inicial da fase definido: " + transform.position);
+        }
     }
-
-    
-
-    
-    
     
     
     private void Update()
