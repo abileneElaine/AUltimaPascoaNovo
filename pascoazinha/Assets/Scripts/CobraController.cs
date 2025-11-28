@@ -100,7 +100,7 @@ public class CobraController : MonoBehaviour, IDamageable
         _currentEnergy -= dano;
 
         // Fica vermelho ao ser atingida
-        StartCoroutine(HitBlink());  
+        StartCoroutine(HitBlink());
 
         if (_currentEnergy <= 0)
         {
@@ -123,7 +123,7 @@ public class CobraController : MonoBehaviour, IDamageable
             _currentEnergy = maxEnergy;
     }
 
-    
+
 
 
     private IEnumerator HitBlink()
@@ -173,13 +173,13 @@ public class CobraController : MonoBehaviour, IDamageable
     // -------------------------------------------------------------------------
     //private void OnCollisionEnter2D(Collision2D other)
     //{
-        //if (!_isAlive) return;
+    //if (!_isAlive) return;
 
-        //if (other.gameObject.CompareTag("Player"))
-        //{
-           // other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
-        //}
-   // }
+    //if (other.gameObject.CompareTag("Player"))
+    //{
+    // other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
+    //}
+    // }
 
     private void OnCollisionStay2D(Collision2D other)
     {
@@ -190,10 +190,10 @@ public class CobraController : MonoBehaviour, IDamageable
             other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
         }
     }
-    
+
     // -------------------------------------------------------------------------
-// ADIÇÃO: RECEBER DANO DA CENOURA (Trigger)
-// -------------------------------------------------------------------------
+    // ADIÇÃO: RECEBER DANO DA CENOURA (Trigger)
+    // -------------------------------------------------------------------------
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!_isAlive) return;

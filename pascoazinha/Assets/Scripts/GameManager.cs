@@ -1,6 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,20 @@ public class GameManager : MonoBehaviour
     // ====== CHECKPOINT ======
     private Vector3 posicaoCheckpoint;
     private bool existeCheckpoint = false;
+
+    // ===== SISTEMA DE INIMIGOS MORTOS =====
+    public HashSet<string> inimigosMortos = new HashSet<string>();
+
+    public void RegistrarInimigoMorto(string id)
+    {
+        if (!inimigosMortos.Contains(id))
+            inimigosMortos.Add(id);
+    }
+
+    public bool InimigoJaMorreu(string id)
+    {
+        return inimigosMortos.Contains(id);
+    }
 
     void Awake()
     {
@@ -130,6 +145,7 @@ public class GameManager : MonoBehaviour
     {
         return posicaoCheckpoint;
     }
+
 }
 
    

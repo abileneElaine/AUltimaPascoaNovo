@@ -27,6 +27,10 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
 
+    public AudioClip somDeMorte;
+    public AudioClip somDano;
+
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -99,6 +103,10 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
 
         _currentEnergy -= dano;
 
+        // 🔊 SOM DE DANO (adicionado aqui!)
+        if (_audioSource != null && somDano != null)
+            _audioSource.PlayOneShot(somDano);
+
         // Fica vermelho ao ser atingida
         StartCoroutine(HitBlink());  
 
@@ -114,8 +122,14 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
             // cor vermelha da morte
             _spriteRenderer.color = Color.red;
 
+            // 🔊 SOM DE MORTE
+            if (_audioSource != null && somDeMorte != null)
+            {
+                _audioSource.PlayOneShot(somDeMorte);
+            }
+
             // desaparecer após 0.4s
-            Destroy(gameObject, 0.4f);
+            Destroy(gameObject, 0.11f);
         }
 
         // trava no máximo
