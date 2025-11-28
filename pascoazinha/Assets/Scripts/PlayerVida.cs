@@ -22,8 +22,6 @@ public class PlayerVida : MonoBehaviour, IDamageable
             transform.position = GameManager.instance.ObterCheckpoint();
             Debug.Log("Player voltou ao checkpoint: " + transform.position);
         }
-        
-        animator = GetComponent<Animator>();   // <-- FALTAVA ISSO
 
     }
 
