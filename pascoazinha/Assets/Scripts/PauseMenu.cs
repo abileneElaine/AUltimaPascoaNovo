@@ -137,39 +137,17 @@ public class PauseMenu : MonoBehaviour
 
     void CarregarConfiguracoesAudio()
     {
-        if (mixer == null) return;
-
         float volMusica = PlayerPrefs.GetFloat("VolumeMusica", -10f);
-        float volGeral = PlayerPrefs.GetFloat("VolumeGeral", -10f);
 
+        sliderMusica.value = volMusica;
         mixer.SetFloat("VolumeMusica", volMusica);
-        mixer.SetFloat("VolumeGeral", volGeral);
-
-        if (sliderMusica != null)
-            sliderMusica.value = volMusica;
-
-        if (sliderGeral != null)
-            sliderGeral.value = volGeral;
     }
 
     public void AjustarVolumeMusica(float valor)
     {
-        if (mixer != null)
-        {
             mixer.SetFloat("VolumeMusica", valor);
             PlayerPrefs.SetFloat("VolumeMusica", valor);
-        }
     }
-
-    public void AjustarVolumeGeral(float valor)
-    {
-        if (mixer != null)
-        {
-            mixer.SetFloat("VolumeGeral", valor);
-            PlayerPrefs.SetFloat("VolumeGeral", valor);
-        }
-    }
-
     // ===== RECONEXÃO AUTOMÁTICA ENTRE CENAS =====
 
     void OnEnable()
