@@ -28394,6 +28394,22 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1461816536}
+    - target: {fileID: 6642545971288567238, guid: 43d17b1432ecf934b85044060efea2f7, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6642545971288567238, guid: 43d17b1432ecf934b85044060efea2f7, type: 3}
+      propertyPath: m_MaxValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6642545971288567238, guid: 43d17b1432ecf934b85044060efea2f7, type: 3}
+      propertyPath: m_MinValue
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6642545971288567238, guid: 43d17b1432ecf934b85044060efea2f7, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8297411139779673666, guid: 43d17b1432ecf934b85044060efea2f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
