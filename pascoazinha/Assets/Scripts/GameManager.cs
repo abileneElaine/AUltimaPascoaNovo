@@ -7,9 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Header("UIs")]
-    public GameObject telaGameOver;
-    public GameObject telaVitoria;
+    [Header("UIs - Arraste aqui no Inspector")]
+    public GameObject telaGameOverPrefab;  // ← Agora são PREFABS ou referências originais
+    public GameObject telaVitoriaPrefab;
+
+    // Referências ATIVAS na cena atual
+    private GameObject telaGameOverAtual;
+    private GameObject telaVitoriaAtual;
 
     private string proximaCena;
 
@@ -56,31 +60,60 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Procura UIs automaticamente na cena nova
-        if (telaVitoria == null)
+        // BUSCA AS TELAS NA CENA ATUAL (incluindo objetos inativos)
+        BuscarTelasNaCena();
+    }
+
+    private void BuscarTelasNaCena()
+    {
+        // Busca TODOS os GameObjects, incluindo inativos
+        GameObject[] todosObjetos = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject obj in todosObjetos)
         {
-            telaVitoria = GameObject.Find("TelaVitoria");
+            // Verifica se o objeto pertence à cena atual (não é prefab)
+            if (obj.scene.isLoaded)
+            {
+                if (obj.name == "TelaVitoria")
+                {
+                    telaVitoriaAtual = obj;
+                    telaVitoriaAtual.SetActive(false);
+                    Debug.Log("✅ TelaVitoria encontrada na cena!");
+                }
+
+                if (obj.name == "TelaGameOver")
+                {
+                    telaGameOverAtual = obj;
+                    telaGameOverAtual.SetActive(false);
+                    Debug.Log("✅ TelaGameOver encontrada na cena!");
+                }
+            }
         }
-           
-        if (telaGameOver == null)
-        {
-            telaGameOver = GameObject.Find("TelaGameOver");
-        }
-           
+
+        if (telaVitoriaAtual == null)
+            Debug.LogWarning("⚠️ TelaVitoria não encontrada! Certifique-se de que existe um GameObject chamado 'TelaVitoria' na cena.");
+
+        if (telaGameOverAtual == null)
+            Debug.LogWarning("⚠️ TelaGameOver não encontrada! Certifique-se de que existe um GameObject chamado 'TelaGameOver' na cena.");
     }
 
     // ========= GAME OVER =========
     public void MostrarTelaGameOver()
     {
+        // Se não encontrou, tenta buscar novamente
+        if (telaGameOverAtual == null)
+            BuscarTelasNaCena();
 
-        if (telaGameOver != null)
-            telaGameOver.SetActive(true);
+        if (telaGameOverAtual != null)
+        {
+            telaGameOverAtual.SetActive(true);
+            Time.timeScale = 0f;
+            StartCoroutine(AguardarTeclaReiniciarFase());
+        }
         else
-            Debug.LogError("TelaGameOver não encontrada na cena!");
-        
-        Time.timeScale = 0f;
-
-        StartCoroutine(AguardarTeclaReiniciarFase());
+        {
+            Debug.LogError("❌ TelaGameOver não foi encontrada na cena!");
+        }
     }
 
     private IEnumerator AguardarTeclaReiniciarFase()
@@ -99,14 +132,20 @@ public class GameManager : MonoBehaviour
     {
         proximaCena = nextScene;
 
-        Time.timeScale = 0f;
+        // Se não encontrou, tenta buscar novamente
+        if (telaVitoriaAtual == null)
+            BuscarTelasNaCena();
 
-        if (telaVitoria != null)
-            telaVitoria.SetActive(true);
+        if (telaVitoriaAtual != null)
+        {
+            telaVitoriaAtual.SetActive(true);
+            Time.timeScale = 0f;
+            StartCoroutine(AguardarTeclaParaProximaFase());
+        }
         else
-            Debug.LogError("TelaVitoria não encontrada na cena!");
-
-        StartCoroutine(AguardarTeclaParaProximaFase());
+        {
+            Debug.LogError("❌ TelaVitoria não foi encontrada na cena!");
+        }
     }
 
     private IEnumerator AguardarTeclaParaProximaFase()
@@ -117,6 +156,10 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         Time.timeScale = 1f;
+
+        // Limpa checkpoint e inimigos ao avançar de fase
+        ResetarCheckpoint();
+
         SceneManager.LoadScene(proximaCena);
     }
 
@@ -127,14 +170,14 @@ public class GameManager : MonoBehaviour
         existeCheckpoint = true;
         Debug.Log("CHECKPOINT DEFINIDO: " + position);
     }
-    
+
     public void ResetarCheckpoint()
     {
         existeCheckpoint = false;
         posicaoCheckpoint = Vector3.zero;
+        inimigosMortos.Clear();
         Debug.Log("Checkpoint resetado para nova fase");
     }
-
 
     public bool TemCheckpoint()
     {
@@ -145,7 +188,4 @@ public class GameManager : MonoBehaviour
     {
         return posicaoCheckpoint;
     }
-
 }
-
-   
