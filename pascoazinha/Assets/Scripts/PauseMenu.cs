@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms;
+using UnityEngine.Audio;
 using UnityEngine.UI;
-using static UnityEditor.ShaderData;
 
 public class PauseMenu : MonoBehaviour
 {
