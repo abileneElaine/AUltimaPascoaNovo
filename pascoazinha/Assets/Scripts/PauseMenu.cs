@@ -1,10 +1,9 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
+using static UnityEditor.ShaderData;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -25,7 +24,6 @@ public class PauseMenu : MonoBehaviour
 
     void Awake()
     {
-        // Singleton - garante apenas um PauseMenu em todas as cenas
         if (instance == null)
         {
             instance = this;
@@ -40,7 +38,6 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        // Garante que os menus começam escondidos
         if (MenuDePausa != null)
             MenuDePausa.SetActive(false);
 
@@ -49,7 +46,6 @@ public class PauseMenu : MonoBehaviour
 
         isPaused = false;
 
-        // Carrega configurações de volume salvas
         CarregarConfiguracoesAudio();
     }
 
@@ -72,11 +68,9 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0f;
             isPaused = true;
 
-            // Garante que opções está fechado
             if (PainelOpcoes != null)
                 PainelOpcoes.SetActive(false);
 
-            // Atualiza sliders ao abrir o pause
             AtualizarSliders();
         }
     }
@@ -89,7 +83,6 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1f;
             isPaused = false;
 
-            // Fecha opções também
             if (PainelOpcoes != null)
                 PainelOpcoes.SetActive(false);
         }
@@ -101,8 +94,6 @@ public class PauseMenu : MonoBehaviour
         {
             MenuDePausa.SetActive(false);
             PainelOpcoes.SetActive(true);
-
-            // Atualiza sliders ao abrir opções
             AtualizarSliders();
         }
     }
@@ -121,7 +112,6 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        // As configurações de áudio serão reaplicadas automaticamente
     }
 
     public void VoltarAoMenu()
@@ -129,9 +119,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
 
-        // Limpa checkpoint ao voltar pro menu
+        // ✅ Limpa TUDO ao voltar pro menu (checkpoint, inimigos E moedas)
         if (GameManager.instance != null)
-            GameManager.instance.ResetarCheckpoint();
+            GameManager.instance.ResetarJogo();
 
         SceneManager.LoadScene("Menu");
     }
@@ -153,15 +143,12 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
-        // Carrega volumes salvos (padrão: -10dB)
         float volMusica = PlayerPrefs.GetFloat("VolumeMusica", -10f);
         float volGeral = PlayerPrefs.GetFloat("VolumeGeral", -10f);
 
-        // Aplica no mixer
         mixer.SetFloat("VolumeMusica", volMusica);
         mixer.SetFloat("VolumeGeral", volGeral);
 
-        // Atualiza sliders
         AtualizarSliders();
 
         Debug.Log($"🔊 Áudio carregado - Música: {volMusica}dB | Geral: {volGeral}dB");
@@ -185,7 +172,7 @@ public class PauseMenu : MonoBehaviour
         {
             mixer.SetFloat("VolumeMusica", valor);
             PlayerPrefs.SetFloat("VolumeMusica", valor);
-            PlayerPrefs.Save(); // ← Salva imediatamente
+            PlayerPrefs.Save();
             Debug.Log($"🎵 Volume Música: {valor}dB");
         }
     }
@@ -196,7 +183,7 @@ public class PauseMenu : MonoBehaviour
         {
             mixer.SetFloat("VolumeGeral", valor);
             PlayerPrefs.SetFloat("VolumeGeral", valor);
-            PlayerPrefs.Save(); // ← Salva imediatamente
+            PlayerPrefs.Save();
             Debug.Log($"🔊 Volume Geral: {valor}dB");
         }
     }
@@ -215,7 +202,6 @@ public class PauseMenu : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Busca os painéis na nova cena automaticamente
         if (MenuDePausa == null)
         {
             GameObject canvas = GameObject.Find("PauseCanvas");
@@ -237,11 +223,9 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        // Reseta estado ao mudar de cena
         isPaused = false;
         Time.timeScale = 1f;
 
-        // IMPORTANTE: Recarrega e reaplica volumes
         CarregarConfiguracoesAudio();
     }
 }

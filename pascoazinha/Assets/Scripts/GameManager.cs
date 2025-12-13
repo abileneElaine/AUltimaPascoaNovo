@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("UIs - Arraste aqui no Inspector")]
-    public GameObject telaGameOverPrefab;  // ← Agora são PREFABS ou referências originais
+    public GameObject telaGameOverPrefab;
     public GameObject telaVitoriaPrefab;
 
     // Referências ATIVAS na cena atual
@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     // ===== SISTEMA DE INIMIGOS MORTOS =====
     public HashSet<string> inimigosMortos = new HashSet<string>();
 
+    // ===== SISTEMA DE MOEDAS =====
+    private int moedasTotais = 0; // Total acumulado de moedas
+
     public void RegistrarInimigoMorto(string id)
     {
         if (!inimigosMortos.Contains(id))
@@ -33,6 +36,34 @@ public class GameManager : MonoBehaviour
     public bool InimigoJaMorreu(string id)
     {
         return inimigosMortos.Contains(id);
+    }
+
+    // ===== MÉTODOS DE MOEDAS =====
+
+    public void AdicionarMoeda()
+    {
+        moedasTotais++;
+        Debug.Log($"💰 Total de moedas: {moedasTotais}");
+    }
+
+    public void RemoverMoedas(int quantidade)
+    {
+        moedasTotais -= quantidade;
+        if (moedasTotais < 0)
+            moedasTotais = 0;
+
+        Debug.Log($"💰 Moedas após remoção: {moedasTotais}");
+    }
+
+    public int ObterMoedasTotais()
+    {
+        return moedasTotais;
+    }
+
+    public void ResetarMoedas()
+    {
+        moedasTotais = 0;
+        Debug.Log("💰 Moedas resetadas para 0");
     }
 
     void Awake()
@@ -124,6 +155,9 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         Time.timeScale = 1f;
+
+        // ✅ MOEDAS PERSISTEM ao morrer - NÃO reseta!
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -157,7 +191,8 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        // Limpa checkpoint e inimigos ao avançar de fase
+        // ✅ MOEDAS PERSISTEM ao passar de fase - NÃO reseta!
+        // Apenas limpa checkpoint e inimigos
         ResetarCheckpoint();
 
         SceneManager.LoadScene(proximaCena);
@@ -177,6 +212,14 @@ public class GameManager : MonoBehaviour
         posicaoCheckpoint = Vector3.zero;
         inimigosMortos.Clear();
         Debug.Log("Checkpoint resetado para nova fase");
+    }
+
+    // Método completo para resetar tudo ao voltar pro menu
+    public void ResetarJogo()
+    {
+        ResetarCheckpoint();
+        ResetarMoedas();
+        Debug.Log("🔄 Jogo resetado completamente");
     }
 
     public bool TemCheckpoint()
