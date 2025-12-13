@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-
 public class CobraController : MonoBehaviour, IDamageable
 {
-    public int maxEnergy;   // <- você já tinha
-    public int damage;      // <- dano ao player
+    [Header("ID Único - IMPORTANTE")]
+    public string enemyID = ""; // ← Defina um ID único no Inspector
+
+    public int maxEnergy;
+    public int damage;
     public float moveSpeed;
     public bool useTransform;
     public bool shouldFlip;
@@ -27,8 +29,21 @@ public class CobraController : MonoBehaviour, IDamageable
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
 
+    public AudioClip somDeMorte;
+    public AudioClip somDano;
+
+    private float damageCooldown = 1f;
+    private float lastDamageTime = 0f;
+
     void Start()
     {
+        // ✅ Verifica se já morreu antes
+        if (GameManager.instance != null && GameManager.instance.InimigoJaMorreu(enemyID))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         _animator = GetComponent<Animator>();
         _collider2D = GetComponent<Collider2D>();
         _audioSource = GetComponent<AudioSource>();
@@ -39,13 +54,9 @@ public class CobraController : MonoBehaviour, IDamageable
         if (shouldFlip) _originalLocalScaleX = transform.localScale.x;
 
         if (useTransform)
-        {
             _moveTarget = moveDestination.localPosition;
-        }
         else
-        {
             _moveTarget = movePosition;
-        }
 
         _initialPosition = transform.position;
         _currentMoveDirection = (_initialPosition + _moveTarget - (Vector2)transform.position).normalized;
@@ -80,8 +91,7 @@ public class CobraController : MonoBehaviour, IDamageable
         if (shouldFlip)
         {
             if (_isReturning)
-                transform.localScale =
-                    new Vector3(-_originalLocalScaleX, transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(-_originalLocalScaleX, transform.localScale.y, transform.localScale.z);
             else
                 transform.localScale = new Vector3(_originalLocalScaleX, transform.localScale.y, transform.localScale.z);
         }
@@ -89,42 +99,40 @@ public class CobraController : MonoBehaviour, IDamageable
         transform.position += (Vector3)_currentMoveDirection * moveSpeed * Time.deltaTime;
     }
 
-
-    // -------------------------------------------------------------------------
-    // ADIÇÃO: RECEBER DANO DA CENOURA
-    // -------------------------------------------------------------------------
-    public void TakeEnergy(int dano)  // já existia por causa do IDamageable
+    public void TakeEnergy(int dano)
     {
         if (!_isAlive) return;
 
         _currentEnergy -= dano;
 
-        // Fica vermelho ao ser atingida
+        if (_audioSource != null && somDano != null)
+            _audioSource.PlayOneShot(somDano);
+
         StartCoroutine(HitBlink());
 
         if (_currentEnergy <= 0)
         {
             _currentEnergy = 0;
-
             _isAlive = false;
 
             _collider2D.enabled = false;
             moveSpeed = 0;
 
-            // cor vermelha da morte
             _spriteRenderer.color = Color.red;
 
-            // desaparecer após 0.4s
+            if (_audioSource != null && somDeMorte != null)
+                _audioSource.PlayOneShot(somDeMorte);
+
+            // ✅ Registra morte no GameManager
+            if (GameManager.instance != null)
+                GameManager.instance.RegistrarInimigoMorto(enemyID);
+
             Destroy(gameObject, 0.4f);
         }
 
-        // trava no máximo
         if (_currentEnergy > maxEnergy)
             _currentEnergy = maxEnergy;
     }
-
-
-
 
     private IEnumerator HitBlink()
     {
@@ -140,69 +148,28 @@ public class CobraController : MonoBehaviour, IDamageable
         _spriteRenderer.color = Color.white;
     }
 
-
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying)
-        {
-            if (useTransform)
-            {
-                Debug.DrawLine(_initialPosition, (Vector3)_initialPosition + moveDestination.localPosition, Color.yellow);
-            }
-            else
-            {
-                Debug.DrawLine(_initialPosition, (Vector3)_initialPosition + (Vector3)movePosition, Color.red);
-            }
-        }
-        else
-        {
-            if (useTransform)
-            {
-                Debug.DrawLine(transform.position, transform.position + moveDestination.localPosition, Color.yellow);
-            }
-            else
-            {
-                Debug.DrawLine(transform.position, transform.position + (Vector3)movePosition, Color.red);
-            }
-        }
-    }
-
-
-    // -------------------------------------------------------------------------
-    // ADIÇÃO: DAR DANO AO PLAYER
-    // -------------------------------------------------------------------------
-    //private void OnCollisionEnter2D(Collision2D other)
-    //{
-    //if (!_isAlive) return;
-
-    //if (other.gameObject.CompareTag("Player"))
-    //{
-    // other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
-    //}
-    // }
-
     private void OnCollisionStay2D(Collision2D other)
     {
         if (!_isAlive) return;
 
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
+            if (Time.time - lastDamageTime >= damageCooldown)
+            {
+                lastDamageTime = Time.time;
+                other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
+            }
         }
     }
 
-    // -------------------------------------------------------------------------
-    // ADIÇÃO: RECEBER DANO DA CENOURA (Trigger)
-    // -------------------------------------------------------------------------
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!_isAlive) return;
 
         if (other.CompareTag("Cenoura"))
         {
-            TakeEnergy(1);   // dano da cenoura (pode mudar depois)
-            Destroy(other.gameObject); // destruir a cenoura ao bater
+            TakeEnergy(1);
+            Destroy(other.gameObject);
         }
     }
-
 }

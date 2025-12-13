@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e29299ec3b3ce49b2c2dc4dd1969ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinID: Moedas
   rotationSpeed: 100
   floatAmplitude: 0.2
   floatFrequency: 3

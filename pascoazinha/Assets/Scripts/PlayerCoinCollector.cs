@@ -13,45 +13,36 @@ public class PlayerCoinCollector : MonoBehaviour
 
     private void Start()
     {
-        // ✅ Carrega moedas salvas no GameManager
+        // Carrega moedas do GameManager
         if (GameManager.instance != null)
         {
             int moedasSalvas = GameManager.instance.ObterMoedasTotais();
-            coins = moedasSalvas % 15; // Pega apenas o resto (0-14)
+            coins = moedasSalvas % 15;
 
-            Debug.Log($"💰 Moedas carregadas: {coins} (Total: {moedasSalvas})");
+            Debug.Log($"💰 Moedas carregadas: {coins} de {moedasSalvas} totais");
         }
 
         AtualizarUI();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    // ✅ Este método é chamado automaticamente pela moeda via GameManager
+    public void AdicionarMoeda()
     {
-        if (other.CompareTag("Coin"))
-        {
-            coins++;
-            Destroy(other.gameObject);
+        coins++;
+        AtualizarUI();
 
-            // ✅ Salva no GameManager também
+        // A cada 15 moedas → +1 vida
+        if (coins >= 15)
+        {
+            coins = 0;
+
             if (GameManager.instance != null)
-                GameManager.instance.AdicionarMoeda();
+                GameManager.instance.RemoverMoedas(15);
 
             AtualizarUI();
+            playerVida.Curar(1);
 
-            // A cada 15 moedas → +1 vida
-            if (coins >= 15)
-            {
-                coins = 0;
-
-                // ✅ Remove as 15 moedas do GameManager também
-                if (GameManager.instance != null)
-                    GameManager.instance.RemoverMoedas(15);
-
-                AtualizarUI();
-                playerVida.Curar(1);
-
-                Debug.Log("❤️ Ganhou +1 vida! Moedas resetadas para 0");
-            }
+            Debug.Log("❤️ +1 vida! Moedas resetadas");
         }
     }
 
@@ -62,5 +53,21 @@ public class PlayerCoinCollector : MonoBehaviour
 
         if (moedaImage != null)
             moedaImage.enabled = true;
+    }
+
+    // Método público para sincronizar com GameManager
+    void Update()
+    {
+        if (GameManager.instance != null)
+        {
+            int totalMoedas = GameManager.instance.ObterMoedasTotais();
+            int moedasAtuais = totalMoedas % 15;
+
+            if (moedasAtuais != coins)
+            {
+                coins = moedasAtuais;
+                AtualizarUI();
+            }
+        }
     }
 }

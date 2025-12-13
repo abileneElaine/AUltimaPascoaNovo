@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: Score
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 58
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1
@@ -1546,6 +1550,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 57
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (16)
@@ -1686,6 +1694,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: Score
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 59
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (18)
@@ -2335,6 +2351,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: Score
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 62
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (24)
@@ -2766,6 +2790,10 @@ PrefabInstance:
       propertyPath: Score
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (6)
@@ -2909,6 +2937,10 @@ PrefabInstance:
     - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: Score
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 64
       objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
@@ -3685,6 +3717,10 @@ PrefabInstance:
       propertyPath: Score
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 66
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (23)
@@ -3981,6 +4017,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 56
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (15)
@@ -4038,6 +4078,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 67
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (2)
@@ -4167,6 +4211,10 @@ PrefabInstance:
     - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: Score
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 55
       objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
@@ -20323,6 +20371,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 61
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (1)
@@ -23534,6 +23586,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 53
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (5)
@@ -24966,6 +25022,10 @@ PrefabInstance:
       propertyPath: Score
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 63
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (12)
@@ -25924,6 +25984,10 @@ PrefabInstance:
       propertyPath: Score
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 65
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (21)
@@ -25981,6 +26045,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067725511}
     m_Modifications:
+    - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: coinID
+      value: Moedas 54
+      objectReference: {fileID: 0}
     - target: {fileID: 3074837830453630223, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: m_Name
       value: Coin 1 (3)

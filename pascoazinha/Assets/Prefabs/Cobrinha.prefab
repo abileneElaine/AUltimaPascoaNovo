@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: damage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1775441510907469194, guid: 9b3a32a6c719c6649a704f37699a4d17, type: 3}
+      propertyPath: enemyID
+      value: Cobra
+      objectReference: {fileID: 0}
     - target: {fileID: 6516210715418232084, guid: 9b3a32a6c719c6649a704f37699a4d17, type: 3}
       propertyPath: m_Name
       value: Cobrinha

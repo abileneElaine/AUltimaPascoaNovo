@@ -24,13 +24,21 @@ public class GameManager : MonoBehaviour
     // ===== SISTEMA DE INIMIGOS MORTOS =====
     public HashSet<string> inimigosMortos = new HashSet<string>();
 
-    // ===== SISTEMA DE MOEDAS =====
-    private int moedasTotais = 0; // Total acumulado de moedas
+    // ===== SISTEMA DE MOEDAS COLETADAS =====
+    private int moedasTotais = 0;
+    public HashSet<string> moedasColetadas = new HashSet<string>();
 
+    // ===== SISTEMA DE CENOURAS COLETADAS =====
+    public HashSet<string> cenourasColetadas = new HashSet<string>();
+
+    // ===== MÉTODOS DE INIMIGOS =====
     public void RegistrarInimigoMorto(string id)
     {
         if (!inimigosMortos.Contains(id))
+        {
             inimigosMortos.Add(id);
+            Debug.Log($"🐍 Inimigo morto: {id}");
+        }
     }
 
     public bool InimigoJaMorreu(string id)
@@ -39,11 +47,19 @@ public class GameManager : MonoBehaviour
     }
 
     // ===== MÉTODOS DE MOEDAS =====
-
-    public void AdicionarMoeda()
+    public void RegistrarMoedaColetada(string id)
     {
-        moedasTotais++;
-        Debug.Log($"💰 Total de moedas: {moedasTotais}");
+        if (!moedasColetadas.Contains(id))
+        {
+            moedasColetadas.Add(id);
+            moedasTotais++;
+            Debug.Log($"💰 Moeda coletada: {id} | Total: {moedasTotais}");
+        }
+    }
+
+    public bool MoedaJaColetada(string id)
+    {
+        return moedasColetadas.Contains(id);
     }
 
     public void RemoverMoedas(int quantidade)
@@ -60,10 +76,33 @@ public class GameManager : MonoBehaviour
         return moedasTotais;
     }
 
-    public void ResetarMoedas()
+    // ===== MÉTODOS DE CENOURAS =====
+    public void RegistrarCenouraColetada(string id)
     {
+        if (!cenourasColetadas.Contains(id))
+        {
+            cenourasColetadas.Add(id);
+            Debug.Log($"🥕 Cenoura coletada: {id}");
+        }
+    }
+
+    public bool CenouraJaColetada(string id)
+    {
+        return cenourasColetadas.Contains(id);
+    }
+
+    // ===== RESETAR FASE (SÓ QUANDO MORRE 3X) =====
+    public void ResetarFaseCompleta()
+    {
+        inimigosMortos.Clear();
+        moedasColetadas.Clear();
+        cenourasColetadas.Clear();
         moedasTotais = 0;
-        Debug.Log("💰 Moedas resetadas para 0");
+
+        // ← CORRIGIDO: Reseta o checkpoint também!
+        ResetarCheckpoint();
+
+        Debug.Log("🔄 FASE RESETADA COMPLETAMENTE (incluindo checkpoint)");
     }
 
     void Awake()
@@ -91,47 +130,37 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // BUSCA AS TELAS NA CENA ATUAL (incluindo objetos inativos)
         BuscarTelasNaCena();
     }
 
     private void BuscarTelasNaCena()
     {
-        // Busca TODOS os GameObjects, incluindo inativos
         GameObject[] todosObjetos = Resources.FindObjectsOfTypeAll<GameObject>();
 
         foreach (GameObject obj in todosObjetos)
         {
-            // Verifica se o objeto pertence à cena atual (não é prefab)
             if (obj.scene.isLoaded)
             {
                 if (obj.name == "TelaVitoria")
                 {
                     telaVitoriaAtual = obj;
                     telaVitoriaAtual.SetActive(false);
-                    Debug.Log("✅ TelaVitoria encontrada na cena!");
+                    Debug.Log("✅ TelaVitoria encontrada!");
                 }
 
                 if (obj.name == "TelaGameOver")
                 {
                     telaGameOverAtual = obj;
                     telaGameOverAtual.SetActive(false);
-                    Debug.Log("✅ TelaGameOver encontrada na cena!");
+                    Debug.Log("✅ TelaGameOver encontrada!");
                 }
             }
         }
-
-        if (telaVitoriaAtual == null)
-            Debug.LogWarning("⚠️ TelaVitoria não encontrada! Certifique-se de que existe um GameObject chamado 'TelaVitoria' na cena.");
-
-        if (telaGameOverAtual == null)
-            Debug.LogWarning("⚠️ TelaGameOver não encontrada! Certifique-se de que existe um GameObject chamado 'TelaGameOver' na cena.");
     }
 
-    // ========= GAME OVER =========
+    // ========= GAME OVER (SÓ QUANDO VIDA CHEGA A 0) =========
     public void MostrarTelaGameOver()
     {
-        // Se não encontrou, tenta buscar novamente
         if (telaGameOverAtual == null)
             BuscarTelasNaCena();
 
@@ -143,7 +172,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("❌ TelaGameOver não foi encontrada na cena!");
+            Debug.LogError("❌ TelaGameOver não encontrada!");
         }
     }
 
@@ -156,7 +185,8 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        // ✅ MOEDAS PERSISTEM ao morrer - NÃO reseta!
+        // ✅ Reseta tudo porque morreu 3x
+        ResetarFaseCompleta();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -166,7 +196,6 @@ public class GameManager : MonoBehaviour
     {
         proximaCena = nextScene;
 
-        // Se não encontrou, tenta buscar novamente
         if (telaVitoriaAtual == null)
             BuscarTelasNaCena();
 
@@ -178,7 +207,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("❌ TelaVitoria não foi encontrada na cena!");
+            Debug.LogError("❌ TelaVitoria não encontrada!");
         }
     }
 
@@ -191,9 +220,9 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        // ✅ MOEDAS PERSISTEM ao passar de fase - NÃO reseta!
-        // Apenas limpa checkpoint e inimigos
+        // Ao passar de fase, limpa os dados da fase anterior
         ResetarCheckpoint();
+        ResetarFaseCompleta();
 
         SceneManager.LoadScene(proximaCena);
     }
@@ -210,15 +239,14 @@ public class GameManager : MonoBehaviour
     {
         existeCheckpoint = false;
         posicaoCheckpoint = Vector3.zero;
-        inimigosMortos.Clear();
-        Debug.Log("Checkpoint resetado para nova fase");
+        Debug.Log("Checkpoint resetado");
     }
 
-    // Método completo para resetar tudo ao voltar pro menu
+    // Reseta TUDO ao voltar pro menu
     public void ResetarJogo()
     {
         ResetarCheckpoint();
-        ResetarMoedas();
+        ResetarFaseCompleta();
         Debug.Log("🔄 Jogo resetado completamente");
     }
 

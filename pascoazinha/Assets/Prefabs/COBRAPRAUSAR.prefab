@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249972171132823332, guid: c7bd90ec26db92a4a94b33a853fab700, type: 3}
       propertyPath: m_Name
-      value: Cobrinha
+      value: COBRAPRAUSAR
       objectReference: {fileID: 0}
     - target: {fileID: 8249972171132823334, guid: c7bd90ec26db92a4a94b33a853fab700, type: 3}
       propertyPath: m_Size.x
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec33113f82626b49a4c2a619b201852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyID: Cobra
   maxEnergy: 2
   damage: 15
   moveSpeed: 2
@@ -188,6 +189,8 @@ MonoBehaviour:
   moveDestination: {fileID: 2887918855372080466}
   blinkHitTimes: 2
   blinkHitDuration: 0.1
+  somDeMorte: {fileID: 0}
+  somDano: {fileID: 0}
 --- !u!50 &3584241413574169185
 Rigidbody2D:
   serializedVersion: 5
