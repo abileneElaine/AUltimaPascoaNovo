@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerThrow : MonoBehaviour
 {
@@ -7,6 +9,12 @@ public class PlayerThrow : MonoBehaviour
     public GameObject cenouraNormal;
     public GameObject cenouraFogo;
     public GameObject cenouraGelo;
+
+    [Header("Dano de cada cenoura")]
+    public int danoBoomerang = 1;
+    public int danoNormal = 1;
+    public int danoFogo = 2;
+    public int danoGelo = 1;
 
     [Header("Efeitos")]
     public GameObject efeitoFogo;
@@ -26,27 +34,28 @@ public class PlayerThrow : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B)) TentarAtirar(cenouraBoomerang, "Boomerang");
-        if (Input.GetKeyDown(KeyCode.N)) TentarAtirar(cenouraNormal, "Normal");
-        if (Input.GetKeyDown(KeyCode.F)) TentarAtirar(cenouraFogo, "Fogo");
-        if (Input.GetKeyDown(KeyCode.G)) TentarAtirar(cenouraGelo, "Gelo");
+        if (Input.GetKeyDown(KeyCode.B)) TentarAtirar(cenouraBoomerang, "Boomerang", danoBoomerang);
+        if (Input.GetKeyDown(KeyCode.N)) TentarAtirar(cenouraNormal, "Normal", danoNormal);
+        if (Input.GetKeyDown(KeyCode.F)) TentarAtirar(cenouraFogo, "Fogo", danoFogo);
+        if (Input.GetKeyDown(KeyCode.G)) TentarAtirar(cenouraGelo, "Gelo", danoGelo);
 
         float h = Input.GetAxisRaw("Horizontal");
         if (h < 0 && facingRight) Flip();
         else if (h > 0 && !facingRight) Flip();
     }
 
-    void TentarAtirar(GameObject prefab, string tipo)
+    void TentarAtirar(GameObject prefab, string tipo, int dano)
     {
-        if (!inventario.UsarCenoura(tipo)) return; // só atira se tiver disponível
-        ThrowCenoura(prefab, tipo);
+        if (!inventario.UsarCenoura(tipo)) return;
+        ThrowCenoura(prefab, tipo, dano);
     }
 
-    void ThrowCenoura(GameObject prefab, string tipo)
+    void ThrowCenoura(GameObject prefab, string tipo, int dano)
     {
         if (!prefab) return;
 
         GameObject cenoura = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+
         Rigidbody2D rb = cenoura.GetComponent<Rigidbody2D>();
         Collider2D colCenoura = cenoura.GetComponent<Collider2D>();
         Collider2D colPlayer = GetComponent<Collider2D>();
@@ -57,12 +66,16 @@ public class PlayerThrow : MonoBehaviour
         float dir = facingRight ? 1f : -1f;
         rb.linearVelocity = new Vector2(dir * throwForce, 0f);
 
-        Cenoura scriptC = cenoura.GetComponent<Cenoura>();
-        if (scriptC)
+        // ✅ Configura o script da cenoura (funciona com ambos os scripts)
+        CenouraProjetil scriptProjetil = cenoura.GetComponent<CenouraProjetil>();
+        if (scriptProjetil != null)
         {
-            scriptC.tipo = tipo;
-            scriptC.efeitoFogo = efeitoFogo;
-            scriptC.efeitoGelo = efeitoGelo;
+            scriptProjetil.tipo = tipo;
+            scriptProjetil.dano = dano;
+            scriptProjetil.efeitoFogo = efeitoFogo;
+            scriptProjetil.efeitoGelo = efeitoGelo;
+
+            Debug.Log($"🥕 Atirou cenoura {tipo} com {dano} de dano");
         }
     }
 

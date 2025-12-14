@@ -109,6 +109,14 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         isPaused = false;
+
+        // ← CORRIGIDO: Reseta TUDO antes de reiniciar
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.ResetarFaseCompleta();
+            Debug.Log("🔄 Fase resetada pelo menu de pausa");
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

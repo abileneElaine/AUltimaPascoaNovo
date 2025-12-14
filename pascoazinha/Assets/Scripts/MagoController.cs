@@ -3,6 +3,9 @@ using System.Collections;
 
 public class MagoPatrulha : MonoBehaviour, IDamageable
 {
+    [Header("ID Único do Boss")]
+    public string bossID = "Mago_1"; // ← CONFIGURE UM ID ÚNICO NO INSPECTOR!
+
     [Header("Configurações Gerais")]
     public int maxEnergy = 10;
     public int damage = 5;
@@ -45,6 +48,14 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
 
     void Start()
     {
+        // ← NOVO: Verifica se o boss já foi morto antes
+        if (GameManager.instance != null && GameManager.instance.InimigoJaMorreu(bossID))
+        {
+            Debug.Log($"🧙 {bossID} já estava morto - não spawna");
+            Destroy(gameObject);
+            return;
+        }
+
         animator = GetComponent<Animator>();
         _collider2D = GetComponent<Collider2D>();
         _audioSource = GetComponent<AudioSource>();
@@ -165,9 +176,6 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         }
     }
 
-    // -------------------------------------------------------------------------
-    //  LÓGICA DE DANO COMPLETA (mesma usada no MiniBoss)
-    // -------------------------------------------------------------------------
     public void TakeEnergy(int dano)
     {
         if (!_isAlive) return;
@@ -181,6 +189,14 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
             _currentEnergy = 0;
 
             _isAlive = false;
+
+            // ← NOVO: Registra a morte no GameManager
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.RegistrarInimigoMorto(bossID);
+                Debug.Log($"💀 {bossID} morreu e foi registrado!");
+            }
+
             moveSpeed = 0;
             _collider2D.enabled = false;
 
@@ -211,10 +227,8 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(blinkHitDuration);
         _spriteRenderer.color = Color.white;
     }
-    
-    // -------------------------------------------------------------------------
-// DAR DANO AO PLAYER IGUAL AO MINIBOSS
-// -------------------------------------------------------------------------
+
+
     private void OnCollisionStay2D(Collision2D other)
     {
         if (!_isAlive) return;
@@ -223,11 +237,13 @@ public class MagoPatrulha : MonoBehaviour, IDamageable
         {
             other.gameObject.GetComponent<IDamageable>()?.TakeEnergy(damage);
         }
+
     }
 
-// -------------------------------------------------------------------------
-// RECEBER DANO DA CENOURA (Trigger) — MESMA LÓGICA DO MINIBOSS
-// -------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------
+    // RECEBER DANO DA CENOURA (Trigger) — MESMA LÓGICA DO MINIBOSS
+    // -------------------------------------------------------------------------
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!_isAlive) return;

@@ -165,5 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed962de47f7f95543a3b89a7b8f7f6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dano: 4
+  tipo: Gelo
+  efeitoFogo: {fileID: 0}
+  efeitoGelo: {fileID: 0}
   speed: 10
   lifetime: 3

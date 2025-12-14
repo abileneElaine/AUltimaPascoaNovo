@@ -4,6 +4,9 @@ using System.Collections;
 
 public class MiniBossPatrulha : MonoBehaviour, IDamageable
 {
+    [Header("ID Único do Boss")]
+    public string bossID = "MiniBoss_1"; // ← CONFIGURE UM ID ÚNICO NO INSPECTOR!
+
     public int maxEnergy;   // <- você já tinha
     public int damage;      // <- dano ao player
     public float moveSpeed;
@@ -33,6 +36,14 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
 
     void Start()
     {
+        // ← NOVO: Verifica se o boss já foi morto antes
+        if (GameManager.instance != null && GameManager.instance.InimigoJaMorreu(bossID))
+        {
+            Debug.Log($"🐍 {bossID} já estava morto - não spawna");
+            Destroy(gameObject);
+            return;
+        }
+
         _animator = GetComponent<Animator>();
         _collider2D = GetComponent<Collider2D>();
         _audioSource = GetComponent<AudioSource>();
@@ -116,6 +127,13 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
 
             _isAlive = false;
 
+            // ← NOVO: Registra a morte no GameManager
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.RegistrarInimigoMorto(bossID);
+                Debug.Log($"💀 {bossID} morreu e foi registrado!");
+            }
+
             _collider2D.enabled = false;
             moveSpeed = 0;
 
@@ -128,7 +146,7 @@ public class MiniBossPatrulha : MonoBehaviour, IDamageable
                 _audioSource.PlayOneShot(somDeMorte);
             }
 
-            // desaparecer após 0.4s
+            // desaparecer após 0.11s
             Destroy(gameObject, 0.11f);
         }
 
