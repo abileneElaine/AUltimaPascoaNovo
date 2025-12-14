@@ -1,10 +1,12 @@
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UIElements;
 
 public class PlayerThrow : MonoBehaviour
 {
-    [Header("Prefabs de cenouras")]
+    [Header("Prefabs PROJÉTEIS (não coletáveis!)")]
     public GameObject cenouraBoomerang;
     public GameObject cenouraNormal;
     public GameObject cenouraFogo;
@@ -46,17 +48,31 @@ public class PlayerThrow : MonoBehaviour
 
     void TentarAtirar(GameObject prefab, string tipo, int dano)
     {
+        if (prefab == null)
+        {
+            Debug.LogError($"❌ Prefab {tipo} não foi arrastado no Inspector!");
+            return;
+        }
+
         if (!inventario.UsarCenoura(tipo)) return;
+
         ThrowCenoura(prefab, tipo, dano);
     }
 
     void ThrowCenoura(GameObject prefab, string tipo, int dano)
     {
-        if (!prefab) return;
+        Debug.Log($"🎯 Atirando cenoura {tipo} com dano {dano}");
 
         GameObject cenoura = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
 
+        // Física
         Rigidbody2D rb = cenoura.GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError($"❌ Prefab {tipo} não tem Rigidbody2D!");
+            return;
+        }
+
         Collider2D colCenoura = cenoura.GetComponent<Collider2D>();
         Collider2D colPlayer = GetComponent<Collider2D>();
 
@@ -66,16 +82,23 @@ public class PlayerThrow : MonoBehaviour
         float dir = facingRight ? 1f : -1f;
         rb.linearVelocity = new Vector2(dir * throwForce, 0f);
 
-        // ✅ Configura o script da cenoura (funciona com ambos os scripts)
-        CenouraProjetil scriptProjetil = cenoura.GetComponent<CenouraProjetil>();
-        if (scriptProjetil != null)
+        // Configura script
+        CenouraProjetil script = cenoura.GetComponent<CenouraProjetil>();
+        if (script != null)
         {
-            scriptProjetil.tipo = tipo;
-            scriptProjetil.dano = dano;
-            scriptProjetil.efeitoFogo = efeitoFogo;
-            scriptProjetil.efeitoGelo = efeitoGelo;
+            Debug.Log($"✅ Script encontrado! Configurando...");
+            Debug.Log($"   Dano ANTES: {script.dano}");
 
-            Debug.Log($"🥕 Atirou cenoura {tipo} com {dano} de dano");
+            script.dano = dano;
+            script.tipo = tipo;
+            script.efeitoFogo = efeitoFogo;
+            script.efeitoGelo = efeitoGelo;
+
+            Debug.Log($"   Dano DEPOIS: {script.dano}");
+        }
+        else
+        {
+            Debug.LogError($"❌ Prefab {tipo} NÃO tem o script CenouraProjetil!");
         }
     }
 

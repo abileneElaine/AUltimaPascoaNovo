@@ -18,9 +18,7 @@ public class CenouraProjetil : MonoBehaviour
 
     void Start()
     {
-        // ✅ DEBUG: Mostra o dano ao criar a cenoura
         Debug.Log($"🥕 Cenoura {tipo} criada com DANO = {dano}");
-
         Destroy(gameObject, lifetime);
     }
 
@@ -28,26 +26,22 @@ public class CenouraProjetil : MonoBehaviour
     {
         if (jaColidiu) return;
 
-        // ✅ DEBUG: Mostra com o que colidiu
-        Debug.Log($"🥕 Cenoura {tipo} colidiu com: {collision.collider.name} (Tag: {collision.collider.tag})");
+        Debug.Log($"🥕 Cenoura colidiu com: {collision.collider.name} (Tag: {collision.collider.tag})");
 
         // Ignora player
         if (collision.collider.CompareTag("Player"))
         {
-            Debug.Log("Ignorou colisão com Player");
+            Debug.Log("Ignorou Player");
             return;
         }
 
-        // Procura IDamageable
+        // Procura inimigo
         IDamageable alvo = collision.collider.GetComponentInParent<IDamageable>();
         if (alvo != null)
         {
-            // ✅ DEBUG: Mostra o dano que VAI aplicar
-            Debug.Log($"🥕 Cenoura {tipo} VAI APLICAR {dano} de dano!");
-
+            Debug.Log($"🥕 Cenoura {tipo} VAI aplicar {dano} de dano!");
             alvo.TakeEnergy(dano);
-
-            Debug.Log($"🥕 Cenoura {tipo} APLICOU {dano} de dano!");
+            Debug.Log($"✅ Dano aplicado!");
 
             AplicarEfeito(collision.transform.position);
 
@@ -57,11 +51,10 @@ public class CenouraProjetil : MonoBehaviour
         }
         else
         {
-            Debug.Log($"⚠️ Não encontrou IDamageable em {collision.collider.name}");
+            Debug.LogWarning($"⚠️ Não encontrou IDamageable em {collision.collider.name}");
         }
 
         // Bateu em parede/chão
-        Debug.Log("Cenoura destruída ao bater em superfície");
         jaColidiu = true;
         Destroy(gameObject);
     }
