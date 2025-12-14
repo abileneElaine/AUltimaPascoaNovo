@@ -4,18 +4,26 @@ using System.Collections;
 public class CobraController : MonoBehaviour, IDamageable
 {
     [Header("ID Único - IMPORTANTE")]
-    public string enemyID = ""; // ← Defina um ID único no Inspector
+    public string enemyID = "cobra_1"; // ← Defina um ID único no Inspector
 
-    public int maxEnergy;
-    public int damage;
-    public float moveSpeed;
+    [Header("Configurações")]
+    public int maxEnergy = 3;
+    public int damage = 1;
+    public float moveSpeed = 2f;
     public bool useTransform;
     public bool shouldFlip;
 
+    [Header("Movimento")]
     [SerializeField] private Vector2 movePosition;
     [SerializeField] private Transform moveDestination;
-    [SerializeField] private int blinkHitTimes;
-    [SerializeField] private float blinkHitDuration;
+
+    [Header("Efeitos")]
+    [SerializeField] private int blinkHitTimes = 3;
+    [SerializeField] private float blinkHitDuration = 0.1f;
+
+    [Header("Sons")]
+    public AudioClip somDeMorte;
+    public AudioClip somDano;
 
     private Vector2 _initialPosition;
     private Vector2 _moveTarget;
@@ -29,9 +37,6 @@ public class CobraController : MonoBehaviour, IDamageable
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
 
-    public AudioClip somDeMorte;
-    public AudioClip somDano;
-
     private float damageCooldown = 1f;
     private float lastDamageTime = 0f;
 
@@ -40,6 +45,7 @@ public class CobraController : MonoBehaviour, IDamageable
         // ✅ Verifica se já morreu antes
         if (GameManager.instance != null && GameManager.instance.InimigoJaMorreu(enemyID))
         {
+            Debug.Log($"🐍 Cobra {enemyID} já estava morta");
             gameObject.SetActive(false);
             return;
         }
@@ -53,15 +59,29 @@ public class CobraController : MonoBehaviour, IDamageable
 
         if (shouldFlip) _originalLocalScaleX = transform.localScale.x;
 
-        if (useTransform)
+        // ✅ SEMPRE pega a posição atual como inicial
+        _initialPosition = transform.position;
+
+        if (useTransform && moveDestination != null)
             _moveTarget = moveDestination.localPosition;
         else
             _moveTarget = movePosition;
 
-        _initialPosition = transform.position;
-        _currentMoveDirection = (_initialPosition + _moveTarget - (Vector2)transform.position).normalized;
+        // ✅ Recalcula a direção inicial
+        Vector2 targetPos = _initialPosition + _moveTarget;
+        _currentMoveDirection = (targetPos - _initialPosition).normalized;
 
+        // ✅ Verifica se a direção é válida
+        if (_currentMoveDirection.magnitude < 0.01f)
+        {
+            Debug.LogWarning($"⚠️ Cobra {enemyID} tem movePosition muito pequeno! Use valores maiores (ex: 3, 5, 10)");
+            _currentMoveDirection = Vector2.right; // Direção padrão
+        }
+
+        _isReturning = false;
         _currentEnergy = maxEnergy;
+
+        Debug.Log($"🐍 Cobra {enemyID} iniciada. Pos: {_initialPosition}, Alvo: {targetPos}");
     }
 
     void Update()
@@ -71,23 +91,41 @@ public class CobraController : MonoBehaviour, IDamageable
 
     private void MovePlatform()
     {
+        // ✅ Calcula as posições de destino
+        Vector2 targetPosition = _initialPosition + _moveTarget;
+
         if (!_isReturning)
         {
-            if (Vector2.Distance(transform.position, _initialPosition + _moveTarget) < 0.1f)
+            // Indo para o alvo
+            float distToTarget = Vector2.Distance(transform.position, targetPosition);
+
+            if (distToTarget < 0.1f)
             {
                 _isReturning = true;
                 _currentMoveDirection = (_initialPosition - (Vector2)transform.position).normalized;
+
+                // ✅ Garante direção válida
+                if (_currentMoveDirection.magnitude < 0.01f)
+                    _currentMoveDirection = -_moveTarget.normalized;
             }
         }
         else
         {
-            if (Vector2.Distance(transform.position, _initialPosition) < 0.1f)
+            // Voltando para a posição inicial
+            float distToInitial = Vector2.Distance(transform.position, _initialPosition);
+
+            if (distToInitial < 0.1f)
             {
                 _isReturning = false;
-                _currentMoveDirection = (_initialPosition + _moveTarget - (Vector2)transform.position).normalized;
+                _currentMoveDirection = (targetPosition - (Vector2)transform.position).normalized;
+
+                // ✅ Garante direção válida
+                if (_currentMoveDirection.magnitude < 0.01f)
+                    _currentMoveDirection = _moveTarget.normalized;
             }
         }
 
+        // ✅ Flip baseado na direção atual
         if (shouldFlip)
         {
             if (_isReturning)
@@ -96,7 +134,11 @@ public class CobraController : MonoBehaviour, IDamageable
                 transform.localScale = new Vector3(_originalLocalScaleX, transform.localScale.y, transform.localScale.z);
         }
 
-        transform.position += (Vector3)_currentMoveDirection * moveSpeed * Time.deltaTime;
+        // ✅ Move apenas se a direção for válida
+        if (_currentMoveDirection.magnitude > 0.01f)
+        {
+            transform.position += (Vector3)_currentMoveDirection * moveSpeed * Time.deltaTime;
+        }
     }
 
     public void TakeEnergy(int dano)
@@ -125,7 +167,10 @@ public class CobraController : MonoBehaviour, IDamageable
 
             // ✅ Registra morte no GameManager
             if (GameManager.instance != null)
+            {
                 GameManager.instance.RegistrarInimigoMorto(enemyID);
+                Debug.Log($"🐍 Cobra {enemyID} morreu");
+            }
 
             Destroy(gameObject, 0.4f);
         }
@@ -168,8 +213,45 @@ public class CobraController : MonoBehaviour, IDamageable
 
         if (other.CompareTag("Cenoura"))
         {
-            TakeEnergy(1);
+            // ✅ DANO VARIÁVEL: Pega o dano da cenoura
+            CenouraProjetil cenoura = other.GetComponent<CenouraProjetil>();
+
+            if (cenoura != null)
+            {
+                Debug.Log($"🐍 Cobra {enemyID} levou {cenoura.dano} de dano");
+                TakeEnergy(cenoura.dano);
+            }
+            else
+            {
+                // Fallback: dano padrão de 1
+                TakeEnergy(1);
+            }
+
             Destroy(other.gameObject);
         }
+    }
+
+    // ✅ Gizmos para ver a rota no editor
+    private void OnDrawGizmos()
+    {
+        Vector2 startPos = Application.isPlaying ? _initialPosition : (Vector2)transform.position;
+        Vector2 endPos;
+
+        if (useTransform && moveDestination != null)
+            endPos = startPos + (Vector2)moveDestination.localPosition;
+        else
+            endPos = startPos + movePosition;
+
+        // Linha da rota
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(startPos, endPos);
+
+        // Ponto inicial (verde)
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(startPos, 0.2f);
+
+        // Ponto final (vermelho)
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(endPos, 0.2f);
     }
 }
