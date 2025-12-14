@@ -107,8 +107,8 @@ MonoBehaviour:
   rotationSpeed: 100
   floatAmplitude: 0.2
   floatFrequency: 3
-  Score: 1
   somMoeda: {fileID: 8300000, guid: c4e6eb5394dcdca43a0209fdafc82b6d, type: 3}
+  Score: 1
 --- !u!58 &8260694226668452725
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -143,8 +143,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 5.135
+  m_Offset: {x: 0, y: 0.012850915}
+  m_Radius: 5.122152
 --- !u!50 &7925628134090638570
 Rigidbody2D:
   serializedVersion: 5
@@ -193,7 +193,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.45014626
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

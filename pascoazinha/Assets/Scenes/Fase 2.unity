@@ -1316,6 +1316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 780347349}
     m_Modifications:
+    - target: {fileID: -1509046371637850461, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
+      propertyPath: MinDistance
+      value: 0.59472847
+      objectReference: {fileID: 0}
     - target: {fileID: 2378989149667012473, guid: 5c29badf4fa04fc40a3d7848a549e0d5, type: 3}
       propertyPath: coinID
       value: Moedas 23
@@ -67967,7 +67971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5831822297779671549, guid: c60338945e0cafd4f966e96194c09134, type: 3}
       propertyPath: maxEnergy
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5831822297779671549, guid: c60338945e0cafd4f966e96194c09134, type: 3}
       propertyPath: somDeMorte
