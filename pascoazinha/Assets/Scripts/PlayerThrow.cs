@@ -13,10 +13,10 @@ public class PlayerThrow : MonoBehaviour
     public GameObject cenouraGelo;
 
     [Header("Dano de cada cenoura")]
-    public int danoBoomerang = 1;
+    public int danoBoomerang = 2;
     public int danoNormal = 1;
-    public int danoFogo = 2;
-    public int danoGelo = 1;
+    public int danoFogo = 3;
+    public int danoGelo = 4;
 
     [Header("Efeitos")]
     public GameObject efeitoFogo;

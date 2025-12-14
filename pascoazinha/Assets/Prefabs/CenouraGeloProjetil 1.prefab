@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4191507879126519479}
   - component: {fileID: -5493839100304454776}
   m_Layer: 0
-  m_Name: CenouraGeloProjetil
+  m_Name: CenouraGeloProjetil 1
   m_TagString: Cenoura
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

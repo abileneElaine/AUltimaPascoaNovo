@@ -1368,6 +1368,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 939078027288133166, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
+      propertyPath: danoGelo
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 939078027288133166, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: cenouraFogo
       value: 
       objectReference: {fileID: 2677161110252432957, guid: be47f5368e5f5c74aa461713d6b668c6, type: 3}
@@ -1379,6 +1383,10 @@ PrefabInstance:
       propertyPath: cenouraNormal
       value: 
       objectReference: {fileID: 96385280023484727, guid: 5d6b88f1d8a618e45b8ec42c91ab5e5e, type: 3}
+    - target: {fileID: 939078027288133166, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
+      propertyPath: danoBoomerang
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 939078027288133166, guid: 8fc892cf1e372ac4ea8e7748bb87ef66, type: 3}
       propertyPath: cenouraBoomerang
       value: 
