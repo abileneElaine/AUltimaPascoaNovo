@@ -3377,7 +3377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 208.65628, y: 242.99951}
+  m_AnchoredPosition: {x: 198, y: 242.99951}
   m_SizeDelta: {x: 49.2, y: 49.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569999232
@@ -61889,7 +61889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 328.6, y: 247.19998}
+  m_AnchoredPosition: {x: 323, y: 247.19998}
   m_SizeDelta: {x: 53.25, y: 59.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1340283447
@@ -62532,7 +62532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -44.247772, y: 249.04181}
+  m_AnchoredPosition: {x: -51, y: 249.04181}
   m_SizeDelta: {x: 51.3868, y: 52.482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1416597690
@@ -64692,7 +64692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 82.65585, y: 244.99976}
+  m_AnchoredPosition: {x: 76, y: 244.99976}
   m_SizeDelta: {x: 49.2, y: 49.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657762597
@@ -68017,6 +68017,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 568575926863195129, guid: 3351646cc7509bf41b0f2d74ba50c5a5, type: 3}
+      propertyPath: danoFogo
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 568575926863195129, guid: 3351646cc7509bf41b0f2d74ba50c5a5, type: 3}
+      propertyPath: danoGelo
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 568575926863195129, guid: 3351646cc7509bf41b0f2d74ba50c5a5, type: 3}
+      propertyPath: cenouraFogo
+      value: 
+      objectReference: {fileID: 2677161110252432957, guid: be47f5368e5f5c74aa461713d6b668c6, type: 3}
+    - target: {fileID: 568575926863195129, guid: 3351646cc7509bf41b0f2d74ba50c5a5, type: 3}
+      propertyPath: cenouraGelo
+      value: 
+      objectReference: {fileID: 601010245718231309, guid: 80adb5a716e31ec41aec8dda7fef3512, type: 3}
+    - target: {fileID: 568575926863195129, guid: 3351646cc7509bf41b0f2d74ba50c5a5, type: 3}
+      propertyPath: danoBoomerang
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620941582742912438, guid: 3351646cc7509bf41b0f2d74ba50c5a5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2168390046831167910, guid: 3351646cc7509bf41b0f2d74ba50c5a5, type: 3}
       propertyPath: moedaImage
       value: 

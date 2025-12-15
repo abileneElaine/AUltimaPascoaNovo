@@ -24298,6 +24298,26 @@ PrefabInstance:
       propertyPath: 'coracoes.Array.data[2]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1047889589348812362, guid: 4a50b70a1b6cef748a6d782d21e303d2, type: 3}
+      propertyPath: danoFogo
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047889589348812362, guid: 4a50b70a1b6cef748a6d782d21e303d2, type: 3}
+      propertyPath: danoGelo
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047889589348812362, guid: 4a50b70a1b6cef748a6d782d21e303d2, type: 3}
+      propertyPath: cenouraFogo
+      value: 
+      objectReference: {fileID: 2677161110252432957, guid: be47f5368e5f5c74aa461713d6b668c6, type: 3}
+    - target: {fileID: 1047889589348812362, guid: 4a50b70a1b6cef748a6d782d21e303d2, type: 3}
+      propertyPath: cenouraGelo
+      value: 
+      objectReference: {fileID: 601010245718231309, guid: 80adb5a716e31ec41aec8dda7fef3512, type: 3}
+    - target: {fileID: 1047889589348812362, guid: 4a50b70a1b6cef748a6d782d21e303d2, type: 3}
+      propertyPath: danoBoomerang
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1462725922188963981, guid: 4a50b70a1b6cef748a6d782d21e303d2, type: 3}
       propertyPath: m_IsTrigger
       value: 0
